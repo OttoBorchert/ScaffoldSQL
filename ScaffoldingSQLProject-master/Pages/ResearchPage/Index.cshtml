@@ -1,0 +1,221 @@
+﻿@page
+@model ScaffoldingSQLProject.Pages.Research_Page.IndexModel
+@{
+}
+
+
+<style>
+    #listContainer {
+        overflow: auto;
+        max-height: 50vh;
+    }
+
+    .parsonsSolution, .typeinSolution {
+        stroke-width: 1px;
+    }
+
+    .parsonsSolution {
+        fill: orange;
+        stroke: red;
+    }
+
+    .typeinSolution {
+        fill: green;
+        stroke: blue;
+    }
+</style>
+<link href="~/css/barchart.css" rel="stylesheet" />
+<h1>Research Page </h1>
+<!-- Modal -->
+<button id="alertModalButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#alertModal" style="display: none;">
+    This button should be hidden!
+</button>
+
+<body>
+    <input type="text" id="Search" placeholder="Question Number" />
+
+    <button type="button" id="Filter" onclick="Filter()">Filter</button>
+    <button type="button" id="ShowAll" onclick="FetchAllData()">Show All Results</button>
+
+    <script>
+        @* Submit Filter if Enter is pressed*@
+        var input = document.getElementById("Search")
+        input.addEventListener("keyup", function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Emulate clicking Filter button
+                document.getElementById("Filter").click();
+            }
+        });
+    </script>
+
+    <div id="listContainer">
+        <ul id="list"></ul>
+        <ul id="list2"></ul>
+    </div>
+
+    <h3>Question Results</h3>
+    <div class="barchartContainer">
+        <svg id="barchart" viewBox="-10 -10 500 100" class="barchart"></svg>
+        <svg id="barchartLedgend" class="barchartLedgend" viewBox="-10 -10 100 25"></svg>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <script src="~/js/barchart.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBLgMQlksXG0DEvTzPJAzj-B2ecsq3aIqQ",
+            authDomain: "scaffold-sql.firebaseapp.com",
+            databaseURL: "https://scaffold-sql-default-rtdb.firebaseio.com",
+            projectId: "scaffold-sql",
+            storageBucket: "scaffold-sql.appspot.com",
+            messagingSenderId: "163714277862",
+            appId: "1:163714277862:web:4d4b2f73ddcc73a3747627",
+            measurementId: "G-177TCV719C"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().signInAnonymously()
+
+        var student = 0;
+
+        function addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts) {
+            var ul = document.getElementById("list");
+            var header = document.createElement("h2");
+
+            var _QuestionNumber = document.createElement("li");
+            var _Question = document.createElement("li");
+            var _Parson = document.createElement("li");
+            var _HintTimestamp = document.createElement("li");
+            var _ExecuteTimestamp = document.createElement("li");
+            var _Attempts = document.createElement("li");
+
+            header.innerHTML = "Student - " + (++student);
+
+            _QuestionNumber.innerHTML = "Question Number: " + QuestionNumber;
+            _Question.innerHTML = "Question: " + Question;
+            _Parson.innerHTML = "Parson: " + Parson;
+            _HintTimestamp.innerHTML = "Hint Timestamp: " + HintTimestamp;
+            _ExecuteTimestamp.innerHTML = "Execute Timestamp: " + ExecuteTimestamp;
+            _Attempts.innerHTML = "Attempts: " + Attempts;
+
+            ul.appendChild(header);
+            ul.appendChild(_QuestionNumber);
+            ul.appendChild(_Question);
+            ul.appendChild(_Parson);
+            ul.appendChild(_HintTimestamp);
+            ul.appendChild(_ExecuteTimestamp);
+            ul.appendChild(_Attempts);
+        }
+        //Clear List for no duplicates
+        function ClearList() {
+            student = 0;
+            let list = document.getElementById("list");
+            while (list.children.length > 0) {
+                list.children[0].remove();
+            }
+        }
+
+        function FetchAllData() {
+            ClearList();
+            let questions = {};
+            firebase.database().ref("parsons/entry").once("value", function (snapshot) {
+                snapshot.forEach(
+                    function (ChildSnapshot) {
+                        let QuestionNumber = ChildSnapshot.val().QuestionNumber;
+                        let Question = ChildSnapshot.val().Question;
+                        let Parson = ChildSnapshot.val().Parson;
+                        let HintTimestamp = ChildSnapshot.val().HintTimestamp;
+                        let ExecuteTimestamp = ChildSnapshot.val().ExecuteTimestamp;
+                        let Attempts = ChildSnapshot.val().Attempts;
+                        if (!(QuestionNumber in questions)) {
+                            questions[QuestionNumber] = { "true": 0, "false": 0 };
+                        }
+                        questions[QuestionNumber][Parson] += Attempts;
+                        addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts);
+                        document.getElementById("Search").value = "";
+                    }
+                );
+                RenderGraph(questions);
+            });
+        }
+
+        /**
+         * Render the graph
+         * param {object[boolean -> string]} questions
+         */
+        function RenderGraph(questions) {
+            // Should we need to rename to columns, rename them here.
+            const columnName = { "true": "Parsons Solution", "false": "Standard Solution" }
+            let barchart = new BarChart('barchart', 'barchartLedgend');
+            barchart.setCssClassColumn('parsonsSolution', columnName[true]);
+            barchart.setCssClassColumn('typeinSolution', columnName[false]);
+            for (const [k, v] of Object.entries(questions)) {
+                barchart.setData(v[true], k, columnName[true]);
+                barchart.setData(v[false], k, columnName[false]);
+            }
+            barchart.render();
+        }
+
+        window.addEventListener('load', FetchAllData, false);
+
+        function Filter() {
+            ClearList();
+            let questions = {};
+            let questionNumbers = document.getElementById("Search").value.split(",");
+            // Trim each value
+            questionNumbers.forEach((value, index) => questionNumbers[index] = value.trim());
+
+            firebase.database().ref('parsons/entry').orderByChild('QuestionNumber').on("value", function (snapshot) {
+                //If Filter is empty
+                if (document.getElementById("Search").value == "") {
+                    firebase.database().ref("parsons/entry").once("value", function (snapshot) {
+                        snapshot.forEach(
+                            function (ChildSnapshot) {
+                                let QuestionNumber = ChildSnapshot.val().QuestionNumber;
+                                let Question = ChildSnapshot.val().Question;
+                                let Parson = ChildSnapshot.val().Parson;
+                                let HintTimestamp = ChildSnapshot.val().HintTimestamp;
+                                let ExecuteTimestamp = ChildSnapshot.val().ExecuteTimestamp;
+                                let Attempts = ChildSnapshot.val().Attempts;
+                                if (!(QuestionNumber in questions)) {
+                                    questions[QuestionNumber] = { "true": 0, "false": 0 };
+                                }
+                                questions[QuestionNumber][Parson] += Attempts;
+                                addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts);
+                                document.getElementById("Search").value = "";
+                            }
+                        );
+                        RenderGraph(questions);
+                    });
+                }
+
+                snapshot.forEach(function (ChildSnapshot) {
+                    let QuestionNumber = ChildSnapshot.val().QuestionNumber;
+                    if (questionNumbers.includes(QuestionNumber)) {
+                        let Question = ChildSnapshot.val().Question;
+                        let Parson = ChildSnapshot.val().Parson;
+                        let HintTimestamp = ChildSnapshot.val().HintTimestamp;
+                        let ExecuteTimestamp = ChildSnapshot.val().ExecuteTimestamp;
+                        let Attempts = ChildSnapshot.val().Attempts;
+                        if (!(QuestionNumber in questions)) {
+                            questions[QuestionNumber] = { "true": 0, "false": 0 };
+                        }
+                        questions[QuestionNumber][Parson] += Attempts;
+                        addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts);
+                    }
+                });
+                RenderGraph(questions);
+            });
+        }
+
+    </script>
+</body>

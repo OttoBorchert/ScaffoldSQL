@@ -1,0 +1,210 @@
+﻿@page
+@model CapstoneIdeas.Pages.QuestionPage2.IndexModel
+@{
+    ViewData["Title"] = "The Best Test";
+}
+
+<meta charset="utf8">
+<title>ScaffoldSQL: Learning SQL via test cases and Parson's problems</title>
+<link rel="stylesheet" href="~/lib/codemirror-5.64.0/lib/codemirror.css">
+<link rel="stylesheet" href="~/css/demo.css" />
+<link href="/css/parsons.css" rel="stylesheet" />
+<link href="/lib/prettify.css" rel="stylesheet" />
+<script src="/lib/prettify.js"></script>
+<script src="~/lib/codemirror-5.64.0/lib/codemirror.js"></script>
+<script src="~/lib/codemirror-5.64.0/mode/sql/sql.js"></script>
+
+<style>
+    @*.testcase_output {
+        background-color: lightgray;
+    }*@
+
+    .pass {
+        background-color: lightgreen;
+    }
+
+    .fail {
+        background-color: pink;
+    }
+
+    .testcase_summary { background: lightgray; }
+
+    .testcase_output > div:first-child { border-radius: 5px 5px 0 0; }
+
+    .testcase_output > div:last-child { border-radius: 0 0 5px 5px; }
+
+    .testcase_output > div { padding: .2em .8em; }
+
+    .database_info_output {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    .database_info_output table {
+        align-self: flex-start;
+        margin: .5em;
+    }
+
+    .database_info_output table > tr > td, .database_info_output table > tr > th { padding: 0 .2em 0 .2em; }
+
+    .database_info_output table > tr > th { text-align: center; }
+
+    .database_info_output table > caption {
+        caption-side: top;
+        color: black;
+    }
+</style>
+
+<body>
+    <h1>ScaffoldSQL</h1>
+    <main>
+        <label id='prompt' class='nohint' for='commands'>Enter some SQL</label>
+        <br class='nohint'>
+        @Html.AntiForgeryToken()
+        <div id='hint_area' style='display: none;'>
+            <p>
+                Construct your SQL program by dragging lines of code from the left to the right. You can change the
+                names of the (<span class="jsparson-toggle"></span>)
+                values by clicking them. You don't necessarily need to use all of the lines.
+            </p>
+            <div id='questionOutputHint' class='questionOutputHint'>Question will be displayed here</div>
+            <div id='sortableTrash' class='sortable-code'>
+                <p>Trash</p>
+            </div>
+            <div id='sortable' class='sortable-code'>
+                <p>Solution</p>
+            </div>
+            <div style='clear:both;'></div>
+            <p>
+                <button class='button' href="#" id="newInstanceLink">Reshuffle</button>
+                <button class='button' href="#" id="feedbackLink">Execute</button>
+            </p>
+            <div style='clear:both;'></div>
+            <!-- <div id="unittest"></div> -->
+            <script src="/lib/jquery.min.js"></script>
+            <script src="/lib/jquery-ui.min.js"></script>
+            <script src="/lib/jquery.ui.touch-punch.min.js"></script>
+            <script src="/lib/underscore-min.js"></script>
+            <script src="/lib/lis.js"></script>
+            <script src="/js/parsons.js"></script>
+            <script src="/lib/skulpt.js"></script>
+            <script src="/lib/skulpt-stdlib.js"></script>
+        </div>
+
+        <div id='questionOutputNoHint' class='questionOutputNoHint'>Question will be displayed here</div>
+        <textarea class='nohint' id="commands">SELECT * &#013; FROM Players;</textarea>
+        <button id='execute' class='nohint button'>Execute</button>
+        <button id='refresh' class='refresh button' onClick='clearAllOutputs()'>Clear Outputs</button>
+        <button id='showTables' class='tables button' onClick="showTables();">Show Database Information</button>
+        <button id='hint' class='nohint button invisible' onClick="removeExtraButtons();">Hint</button>
+        <!-- If hint is clicked remove refresh button -->
+        <!--
+    <button id='savedb' class="button">Save the db</button>
+    <label class="button">Load an SQLite database file: <input type='file' id='dbfile'></label>
+    -->
+        <p></p>
+        <div id='error' class='error'></div>
+        <div id='testcase_output' class='testcase_output'>
+            <p>Test case results will be displayed here</p>
+        </div>
+        <div id="database_info_output" class="database_info_output">
+
+        </div>
+        <pre id='output'>Database output will be displayed here</pre>
+    </main>
+
+    <script type="text/javascript" src="~/js/scaffold_sql.js"></script>
+    <script type="text/javascript" src="~/js/sql.js"></script>
+    <script type="text/javascript" src="~/dist/worker.sql-wasm-debug.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script type="text/javascript" src="~/js/readWriteData.js"></script>
+    <script src="~/lib/crypto-js/aes.js"></script>
+
+    @*if execute button has not been clicked, hide hint button, if it has been clicked, show hint button*@
+
+
+    @*<script>
+        //forces the student to attempt one free form text answer, when they hit execute, will make the hint button appear
+        if they need it
+        $("#execute").click(function () {
+        $("#hint").removeClass("invisible")
+        });
+        </script>*@
+
+
+    @*<script>
+        //when the hint button is pressed, will hide question that gets moved to the bottom
+        $("#hint").click(function () {
+        $("#questionOutputNoHint").addClass("invisible")
+        });
+        </script>*@
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('q')) {
+            question = params.get('q');
+            document.getElementById("prompt").innerHTML = "Enter Some SQL for Question: " + question
+            let url = question + '.txt';
+            $.ajax({
+                type: 'GET',
+                // Call the FileController to get the Question Contents
+                url: `FileController/GetQuestion/${url}`,
+                success: function (results) {
+                    readQuestions(results);
+                    questionData = results;
+                    parsonProblem = results.Parsons.join('\n');
+                }
+            });
+        } else {
+            loadBookDB();
+        }
+
+        var readQuestions = function (result) {
+            // reads and removes the first string containing the question in the text files and assigns it to questionOutput
+            console.log("QuestionOutput is " + result.Question);
+            // outputs the question above the text box, when the hint button was not pressed
+            document.getElementById("questionOutputNoHint").innerHTML = result.Question;
+            // outputs the question above the Parson Problem draggables
+            document.getElementById("questionOutputHint").innerHTML = result.Question;
+            //var sendQuestion = function (questionOutput);
+            //return this.questionOutput
+            // Reads and removes the first string containing whether parsons problem/hint button is on or off
+            // and assigns it to parsonInterfaceInput
+            // takes parsonInterfaceInput string and makes it lowercase
+            console.log("parsons interface is " + result.ParsonsEnable);
+            // While the question page is bieng loaded, if parsonInterace string contains "true", after one free form
+            // text is attempted, the hint button is made visible after one free form text attempt
+            // This has to be done while the page is bieng loaded
+            if (result.ParsonsEnable) {
+                $("#hint").removeClass("invisible");
+            }
+            // For now, hardcode the first element.
+            loadBookDB(result.Database[0]);
+        }
+
+        var removeExtraButtons = function() {
+            document.getElementById('refresh').style.display = 'none';
+            document.getElementById('showTables').style.display = 'none';
+        }
+
+        function showTables() {
+            clearNode(document.getElementById('database_info_output'));
+            clearNode(document.getElementById('questionOutputHint'));
+            //clearNode(document.getElementById('questionOutputNoHint'));
+            clearNode(document.getElementById('output'));
+            DisplayDatabaseInfo('database_info_output');
+        }
+    </script>
+
+    <script>
+        var timestamp = Date.now();
+        var d = new Date(timestamp);
+        document.write(d);
+    </script>
+
+</body>

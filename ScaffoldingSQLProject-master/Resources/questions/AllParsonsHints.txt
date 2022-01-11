@@ -1,0 +1,60 @@
+Test Question for unit testing - 2.333
+True
+True
+StartSecrets
+MDE=pV6TpqYlQSmlzLLJ8OnC1A==Maj7GABQFZGF039KPURNGw==nIeDOTs3r+PZ9NXHspdG5PgYkUYk+vGNLf1/m2iTKSctg8jmtK8V7HvnFK9RRnia
+MDE=0TT7YaXmq9l6RkHSBJlyYw==6EjyihXvtuO+B938gPRMaQ==Q40UBEnO3q2KpQOH2VPCFEViAihIuNkzx/tHm3dsms4EvwOWyaG2rzcZF7r8UfXc
+MDE=Nf5A1l8eZtQsNud1sAfawg==bBhHdcx2p0xbsuh6z/EN4Q==N4hheDo2k7n73fa8KukM8RixU8Olye5LBcnI/OXZ86nzaYHgT0M/s7nj2v+Oml5y
+EndSecrets
+StartParsonsSecrets
+MDE=8X/TZ0xaSNm6Utm5ECNZuw==Saov+5a73IbiMPe5tFRZuw==cRbKqqSkFOfXkPOqwSlbqD2s/OgJUZHm8m88tOBOktlFlTgvzScRoZ1OtHdXzhDZ
+MDE=BiNeimXcE3luVVfXUK+EPQ==Y5XV8icMCm4TOa88ifTrcQ==5/np9Icbh/kPGRORinX4tHi30KF74CqRbrEYTvN8T85INNc02UHMd592UCWhwk4w
+MDE=eAT6/R280a2M5l0cR2fL5A==B+P1EENSfIEyRjznJwX7zA==sz1JJ49L9B9gCSLRpIDMNPFQkAkck0nFeihIbVbDyLV7BUyq+Y/x2Vg1W5W4/hg/
+MDE=jNThLzYh+0rrrrHmRVkG9A==6lJxtem1+SNrEbTS4nbWag==TDTupGorOKYSDKxo2ETCZIAUFu9X7kMN/mAJlrFV8Q4oFMEOf/ndBQWpsAiwKPIF
+EndParsonsSecrets
+L R 1
+L C 2
+V 3,4 == Cell Value
+C 5 == Column Name
+Parsons
+SELECT *,$$toggle::AVG(age)::AVG(score)$$
+FROM $$toggle::table::table2$$
+AS $$toggle::t::t2$$
+;
+(
+)
+
+HAVING $$toggle::id>25::level = 28$$
+WHERE $$toggle::age &gt;= 25::age = 25$$
+
+JOIN $$toggle::test::players::guild$$
+CROSS JOIN $$toggle::test::players::guild$$
+RIGHT JOIN $$toggle::test::players::guild$$
+FULL OUTER JOIN $$toggle::test::players::guild$$
+LEFT JOIN $$toggle::test::players::guild$$
+NATURAL JOIN $$toggle::test::players::guild$$
+ON $$toggle::data = 5::data = 6$$
+UNION
+UNION ALL
+USING ($$toggle::test::players::guild$$)
+
+DELETE FROM $$toggle::test::players::guild$$
+DROP TABLE $$toggle::test::players::guild$$
+INSERT INTO $$toggle::test::players::guild$$ ($$toggle::test::players::guild$$, $$toggle::test::players::guild$$, $$toggle::test::players::guild$$)
+REPLACE INTO $$toggle::test::players::guild$$ ($$toggle::test::players::guild$$, $$toggle::test::players::guild$$, $$toggle::test::players::guild$$)
+SET columns1 = val_1, column2 = val_2, $$toggle::test::test2$$
+UPDATE $$toggle::test::players::guild$$
+VALUES ($$toggle::1::2$$, 5, 6)
+
+ASC
+DESC
+GROUP BY $$toggle::level::data::name$$
+LIMIT $$toggle::5::6::7$$
+OFFSET $$toggle::5::6::7$$
+ORDER BY $$toggle::age::level::ssn$$
+
+EndParsons
+StartDatabase
+chinook.db
+EndDatabase
+1

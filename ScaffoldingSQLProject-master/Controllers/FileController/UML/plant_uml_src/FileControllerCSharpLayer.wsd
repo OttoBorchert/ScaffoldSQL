@@ -1,0 +1,70 @@
+@startuml FileController C# Layer
+!theme mars
+skinparam component {
+    FontColor<<transparent>> transparent
+    BorderColor<<transparent>> transparent
+    BackgroundColor<<transparent>> transparent
+    FontSize<<transparent>> 0
+}
+
+title FileController C# Layer
+
+class Hashtable <<GetFileContents>> {
+	+ string File
+	+ string Number
+	+ string Question
+	+ bool TestCaseEnable
+	+ bool ParsonsEnable
+	+ string SecretWord
+	+ string SecretWordParson
+	+ List<string> TestCases
+	+ List<string> Parsons
+	+ List<string> Database
+}
+
+note right of Hashtable::SecretWord
+	SecretWord and SecretWord parsons
+	are a single string that
+	are delimitted by commas.
+endnote
+
+note right of Hashtable::Database
+	Although this is a list, this is
+	not utilized currently as a list,
+	and only the first value is read.
+	This is done to future proof the
+	API and file format.
+endnote
+
+note bottom of Hashtable
+	This is the hashtable that is
+	output from
+	FileController::GetContents.
+endnote
+
+class FileController extends Controller {
+	- {static} Regex p_testCaseRE
+	- {static} Regex p_questionFileNameNoExt
+	- {static} Regex p_storyFileNameNoExt
+	' Begin methods
+	- {static} void ReadLine(List<string>, IEnumerator<string>, out bool, ref int)
+	- {static} void ReadUntil(List<string>, string, string, ref bool, ref int, bool)
+	- {static} List<string> ReadRange(IEnumerator<string> lines, string, string, ref bool, ref int)
+	- {static} List<string> ReadRangeOrSingle(IEnumerator<string>, string, string, ref bool, ref int)
+	- {static} void AttemptAdd(string, IEnumerator<string>, List<string>, Hashtable, string, string, ref bool, ref int)
+	- {static} void AttemptAddLine(string, IEnumerator<string>, string, Hashtable, ref bool, ref int, Regex)
+	- {static} void ReadRemainingWhitespaceAndComments(IEnumerator<string, ref bool, ref int)
+	- {static} string GetQuestionPath(string)
+	' Begin public methods
+	+ {static} List<string> DatabaseList()
+	+ {static} List<string> DatabaseListSimple()
+	+ {static} List<string> FileList()
+	+ {static} List<sthring> FileListSimple()
+	+ {static} Hashtable GetFileContents(string)
+	+ {static} IEnumerable<string> GetUnitNumbers()
+	+ {static} IEnumerable<string> GetQuestionsFromUnit(string)
+	+ {static} void WriteQuestion(string, string)
+	+ {static} void WriteDatabase(IFormFile)
+}
+
+@enduml

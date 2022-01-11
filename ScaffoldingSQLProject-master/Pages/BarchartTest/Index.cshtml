@@ -1,0 +1,51 @@
+﻿@page
+@model ScaffoldingSQLProject.Pages.BarchartTest.IndexModel
+@{
+    ViewData["Title"] = "Barchart Test";
+}
+<link href="~/css/barchart.css" rel="stylesheet" />
+@*Cant give this div an ID. Why? The SVG is then removed. For some reason.*@
+<div class="barchartContainer" style="height:35vh;">
+    <svg class="barchart" style="border: black solid 2px" id=barchart viewBox="-10 -10 500 100" height=100% width=100%>
+        <!-- DO NOT REMOVE -->
+    </svg>
+    <svg id="barchartLedgend" class="barchartLedgend" viewBox="-10 -10 500 100">
+
+    </svg>
+</div>
+<label for="resizer">Height</label>
+<input id="resizer" type="range" min="1" max="100" />
+<br />
+<label for="resizerW">Width</label>
+<input id="resizerW" type="range" min="1" max="100" />
+<script src="~/js/barchart.js"></script>
+<script>
+    let b = new BarChart('barchart', 'barchartLedgend');
+    let question = {
+        '1.1': 15, '1.2': 16, '1.3': 5, '1.4': 18
+    };
+    let parsons = {
+        '1.1': 2, '1.2': 30, '1.3': 5, '1.4': 21
+    };
+    for (let [k, v] of Object.entries(question)) {
+        b.setData(v, k, 'Question');
+    }
+    for (let [k, v] of Object.entries(parsons)) {
+        b.setData(v, k, 'Parsons');
+    }
+    b.setCssStyleColumn('fill:green;', 'Question');
+    b.setCssStyleColumn('fill:orange;', 'Parsons');
+    b.render(10, distBetweenGroups = 20);
+    document.getElementById('resizer').addEventListener('input', (ev) => {
+        console.log(ev.srcElement.value);
+        let e = document.getElementsByClassName('barchartContainer')[0];
+        let style = e.getAttribute('style').replace(/height:.*;/, '') + `height:${ev.srcElement.value}vh;`;
+        e.setAttribute('style', style);
+    });
+    document.getElementById('resizerW').addEventListener('input', (ev) => {
+        console.log(ev.srcElement.value);
+        let e = document.getElementsByClassName('barchartContainer')[0];
+        let style = e.getAttribute('style').replace(/width:.*;/, '') + `width:${ev.srcElement.value}vw;`;
+        e.setAttribute('style', style);
+    });
+</script>

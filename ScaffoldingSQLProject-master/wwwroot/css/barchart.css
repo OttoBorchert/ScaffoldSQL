@@ -1,0 +1,50 @@
+svg.barchart {
+	transform: scale(1, -1);
+	min-width: 512px;
+/*	flex: 1 1 auto;*/
+}
+
+svg.barchartLedgend {
+/*	flex: 1 1 auto;*/
+	max-width: 256px;
+}
+
+div.barchartContainer {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+svg.barchart text {
+    color: black;
+    transform: scale(1, -1);
+}
+
+/* 
+    Set default to hot pink for error checking puropses. 
+    (Similar to how some games will use pinkn or a checkerboard pattern) 
+*/
+svg.barchart rect { color:hotpink; }
+
+svg.barchartLedgend text {
+    font-size: .25em;
+}
+
+svg.barchartLedgend rect {
+    width: .25em;
+    height: .25em;
+}
+
+svg.barchart .barchartcolumn text {
+    font-size: .4em;
+}
+
+svg.barchart .barchartrow text {
+    font-size: .4em;
+}
+
+svg.barchart line {
+    stroke: black;
+    stroke-width: .01em;
+}

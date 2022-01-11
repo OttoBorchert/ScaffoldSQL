@@ -1,0 +1,11 @@
+﻿.button {
+    color: #333;
+    background: linear-gradient(#eee, #ddd);
+    border: 1 px solid #222;
+    border-radius: 3 px;
+    padding: 7 px;
+    margin-right: 5 px;
+    transition: .3s;
+    font-family: ubuntu, sans-serif;
+    font-size: 1em;
+}

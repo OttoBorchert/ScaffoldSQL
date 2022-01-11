@@ -1,0 +1,32 @@
+@startuml FileController File Data
+!theme mars
+skinparam component {
+    FontColor<<transparent>> transparent
+    BorderColor<<transparent>> transparent
+    BackgroundColor<<transparent>> transparent
+    FontSize<<transparent>> 0
+}
+
+title FileController File Data
+
+interface IFileDataProvider {
+	+ string QuestionPath
+	+ string DbPath
+}
+
+class FileDataProvider extends IFileDataProvider
+
+FileDataProvider +-- FileController
+
+class FileController extends Controller
+
+FileData +-- FileController
+
+class FileData {
+	- {static} IFileDataProvider provider
+	+ {static} string QuestionDirectory
+	+ {static} string DBPath
+	+ {static} void Configure(IFileDataProvider)
+}
+
+@enduml

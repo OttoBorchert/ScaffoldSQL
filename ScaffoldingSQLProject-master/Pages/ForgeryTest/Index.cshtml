@@ -1,0 +1,28 @@
+﻿@page
+@model ScaffoldingSQLProject.Pages.ForgeryTest.ForgeryTestModel
+@{
+}
+@Html.AntiForgeryToken()
+<script>
+    function GetWord(filename) {
+        $.ajax(
+            {
+                url: "/FileController/SecretWord",
+                type: "POST",
+                data: {
+                    __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val(),
+                    file: filename,
+                },
+                success: function (request) {
+                    console.log(request);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log(jqXHR);
+                    console.log(errorThrown);
+                }
+            }
+        );
+    }
+</script>
+<button value="Get Secret Word" onclick="GetWord(1.1.txt)">"Get Secret Word</button>

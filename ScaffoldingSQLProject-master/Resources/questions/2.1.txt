@@ -1,0 +1,23 @@
+How is it going?
+True
+True
+StartSecrets
+U2FsdGVkX187UF5rRGVINUFuTPq7jV6rXEHs41PtDdw=
+U2FsdGVkX19D6oS2XL+fRDC0Xw+gT0K16+U4C7Dx1oA=
+U2FsdGVkX19zt3YPe3SfISF6UCSFgd406o3Rj9UGF8s=
+EndSecrets
+StartParsonsSecrets
+U2FsdGVkX1/+LLju8WtJnfsQSUyw+fuOHfhx7wwPo+4=
+U2FsdGVkX1+Z9z281rJ9VYFiV4ybJuATvmVxV+iRop0=
+U2FsdGVkX18b9eVE4KNcxxhCaOToDOiNOqxNzYc9tHQ=
+EndParsonsSecrets
+L R 19
+L C 5
+V 0,0 == 1
+Parsons
+FROM $$toggle::Players::Guilds::Items$$
+SELECT $$toggle::*::Name::Players$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase

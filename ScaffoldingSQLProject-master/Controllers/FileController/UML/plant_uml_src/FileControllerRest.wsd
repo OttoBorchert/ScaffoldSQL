@@ -1,0 +1,169 @@
+@startuml FileController REST API
+!theme mars
+skinparam component {
+    FontColor<<transparent>> transparent
+    BorderColor<<transparent>> transparent
+    BackgroundColor<<transparent>> transparent
+    FontSize<<transparent>> 0
+}
+
+hide <<transparent>> stereotype
+
+' Set the title
+Title FileController REST API
+
+' Create database component
+component [Database] as dbService {
+    rectangle Database {
+    }
+
+    rectangle Bytes {
+    }
+
+    class "List<GET>" as List {
+        + List<string>
+    }
+    class "ListSimple<GET>" as ListSimple {
+        + List<string>
+    }
+    class "{File Name}<GET>" as FileNameDatabase {
+            + List<bytes>
+    }
+}
+
+' Create Unit Numbers Component
+component [UnitNumbers] as UnitNumbersComponent {
+    class "UnitNumbers<GET>" as UnitNumbers {
+        + List<string>
+    }
+
+    rectangle "{Unit Name}" as UnitName {
+    }
+
+    class "Questions<GET>" as UnitQuestions {
+        + List<string>
+    }
+
+    rectangle "All" as UnitAll {
+    }
+
+    class "Questions<GET>" as UnitAllQuestions {
+        + Dictionary<string, IEnumerable<string>>
+    }
+
+    note bottom of UnitAllQuestions
+        The IEnumerable<string>
+        is tranformed into a JS array
+        before transit
+    endnote
+}
+
+' Secret words
+component [SecretWord] as SecretWordComponent {
+    class "SecretWord<POST>" as SecretWords {
+        + string
+    }
+    class "SecretWordParsons<POST>" as SecretWordsParsons {
+        + string
+    }
+}
+
+' File Controller AKA controller root
+rectangle "/FileController" as "FileController" {
+}
+
+' Create GetQuestions
+component [GetQuestion] as GetQuestionComponent {
+
+    class "GetQuestion<POST>" as GetQuestionPost {
+        + File: string
+        + Number: string
+        + Question: string
+        + TestCaseEnable: bool
+        + ParsonsEnable: bool
+        + SecretWord: List<string>
+        + SecretWordParson: List<string>
+        + TestCases: List<string>
+        + Parsons: List<string>
+        + Database: List<string>
+    }
+
+    class "{File Name}<GET>" as FileNameGetQuestion {
+        + File: string
+        + Number: string
+        + Question: string
+        + TestCaseEnable: bool
+        + ParsonsEnable: bool
+        + TestCases: List<string>
+        + Parsons: List<string>
+        + Database: List<string>
+    }
+}
+
+
+component "hidden_component" as hidden_component <<transparent>> {
+    class "FileList<GET>" as FileList {
+        + List<string>
+    }
+
+    class "FileListSimple<GET>" as FileListSimple {
+        + List<string>
+    }
+
+    rectangle QuestionExists {
+
+    }
+
+    class "{File Name}" as FileNameQuestionExists {
+        + bool
+    }
+}
+
+' Database
+FileController     -Down-> Database
+Database           -Down-> Bytes
+Database           -Down-> List
+note on link: HTML Code 200
+Database           -Down-> ListSimple
+note on link: HTML Code 200
+Bytes              -Down-> FileNameDatabase
+note on link: HTML Code 200, 404
+
+' Get Question
+FileController     --> GetQuestionPost
+note on link: HTML Code 200, 400, 404
+GetQuestionPost    --> FileNameGetQuestion
+note on link: HTML Code 200, 404
+
+' FileList
+FileController     -left-> FileList
+note on link: HTML Code 200
+FileController     -> QuestionExists
+' Coax element up
+FileList           -[hidden]up-> QuestionExists
+QuestionExists     -left-> FileNameQuestionExists
+note on link: HTML Code 200
+FileController     -left-> FileListSimple
+note on link: HTML Code 200
+' Coax the element to move
+FileList           -[hidden]down- FileListSimple
+
+' Unit Numbers
+FileController     -> UnitNumbers
+note on link: HTML Code 200
+UnitName           -> UnitQuestions
+note on link: HTML Code 200, 404
+UnitNumbers        --> UnitName
+UnitNumbers        -> UnitAll
+UnitAll            -> UnitAllQuestions
+note on link
+HTML Code 200
+endnote
+
+' Secret Words
+FileController     -up-> SecretWords
+note on link: HTML Code 200, 400, 404
+SecretWords          -> SecretWordsParsons
+note on link: HTML Code 200, 400, 404
+
+@enduml

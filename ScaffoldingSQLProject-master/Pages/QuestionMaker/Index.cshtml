@@ -1,0 +1,197 @@
+﻿@page
+@model CapstoneIdeas.Pages.QuestionMaker.IndexModel
+@{ ViewData["Title"] = "Test Cases"; }
+@*Create  a string, concat everything to the string individually instead of as i'm writing to the text file*@
+<style>
+    .card-body {
+        background-color: #ABABAB
+    }
+</style>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<div class="card">
+    <div class="card-header">
+        <h3>Please enter the information to make a new problem</h3>
+    </div>
+    <div class="card-body">
+        <form id="form1" method="post" onsubmit="return OverWriteFile();">
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="UnitNumber">Unit Number</label>
+                    <input id="unitNumber" class="form-control" type="text" asp-for="UnitNumber" required />
+                    <label asp-for="QuestionNumber">Question Number</label>
+                    <input id="questionNumber" class="form-control" type="text" asp-for="QuestionNumber" required />
+                    <input id="edit" type="button" class="form-control hide" value="Edit Existing Question" onclick="loadExisting()"/>
+                    <label asp-for="Database">Database</label>
+                    <select id="databases" asp-for="Database" class="form-control" required>
+                        @*Do not delete! This is populated on load!*@
+                    </select>
+
+                    @* Required for getting the post request. *@
+                    @Html.AntiForgeryToken()
+                    <script>
+                        let questionsList = [];
+                        $.ajax({
+                            url: `/FileController/FileListSimple`,
+                            type: 'get',
+                            contentType: 'application/json',
+                            success: result => { questionsList = result; }
+                        });
+
+                        $.ajax({
+                            url: '/FileController/Database/ListSimple',
+                            type: 'GET',
+                            contentType: 'application/json',
+                            success: result => {
+                                let dbSelect = document.getElementById('databases');
+                                for (db of result) {
+                                    let option = document.createElement('option');
+                                    option.innerText = db;
+                                    option.value = db;
+                                    dbSelect.appendChild(option);
+                                    if (db === "fantasy.db") {
+                                        option.setAttribute('selected', true);
+                                    }
+                                }
+                            },
+                            err: ev => {
+                                alert("Could not get the list of databases. Is there a database folder, and do you have permission to access it?");
+                            }
+                        });
+
+                        function questionExists() {
+                            let q = `${document.getElementById("unitNumber").value}.${document.getElementById("questionNumber").value}.txt`;
+                            if (questionsList.includes(q)) {
+                                document.getElementById('edit').classList.remove('hide');
+                            } else {
+                                document.getElementById('edit').classList.add('hide');
+                            }
+                        }
+
+                        let OverWriteFile = function () {
+                            let q = `${document.getElementById('unitNumber').value}.${document.getElementById('questionNumber').value}.txt`;
+                            if (!questionsList.includes(q) || confirm(`Question ${q} already exists. Do you want to overwite it?`)) {
+                                Encrypt('notHashedYet');
+                                Encrypt('notHashedYetPP');
+                                SubmitForm();
+                                Decrypt('notHashedYet');
+                                Decrypt('notHashedYetPP');
+                            }
+                            return false;
+                        }
+
+                        document.getElementById("unitNumber").addEventListener('change', questionExists);
+                        document.getElementById("questionNumber").addEventListener('change', questionExists);
+                    </script>
+                </div>
+                &nbsp;
+            </div>
+            <div class="form-row">
+                <div class="form-group" style="width:100%;">
+                    <label asp-for="Question"> Question</label>
+                    @*<input class="form-control" type="text" asp-for="Question" />*@
+                    <textarea class="form-control" required asp-for="Question" style="resize:none;"></textarea>
+                    <script>
+                        let txtArea = document.getElementById("Question");
+                        const rows = txtArea.rows;
+                        txtArea.addEventListener("input", async (ev) => {
+                            if (ev.inputType === "insertLineBreak" || ev.inputType == "deleteContentBackward") {
+                                let currentRows = ev.srcElement.value.split('\n').length;
+                                currentRows = Math.max(currentRows, rows);
+                                ev.srcElement.rows = currentRows;
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="testCase" asp-for="TestCasesON" />
+                <label class="custom-control-label" for="testCase">
+                    Test Cases on or off?
+                </label>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <div>
+                        <Label>Number of Rows</Label>
+                        <input class="form-control" type="number" min="0" asp-for="TestCaseNumberOfRows" />
+                        &nbsp;
+                    </div>
+                </div>
+                &nbsp;
+                <div class="form-group">
+                    <div>
+                        <Label>Number of columns</Label>
+                        <input class="form-control" type="number" min="0" asp-for="TestCaseNumberOfCols" />
+                    </div>
+                </div>
+            </div>
+            <div id="rowColumnValueFormGroup" class="form-group" data-RowNumber="0" data-show-remove="None">
+                @* Do not remove! *@
+                <input type="button" id="addRowColumnValueFormGroup" value="Add Test for specific row, column." />
+            </div>
+            <div class="form-group">
+                <label asp-for="SecretWord">Secret Word</label>
+                <input type="text" id="notHashedYet" asp-for="SecretWord" />
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="Switch7" asp-for="ParsonsOn">
+                <label class="custom-control-label" for="Switch7">
+                    Parson's Problem on?
+                </label>
+            </div>
+            <div id="ParsonsProblemForum" class="form-group">
+                @* Do not remove! *@
+                <input id="btnAddParsonsHint" type="button" value="Add Parsons Problem Hint" data-RowNumber="0" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ParsonsSecretWord">Secret Word for parson's</label>
+                <input type="text" id="notHashedYetPP" asp-for="ParsonsSecretWord" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/js/QuestionMaker.js" asp-append-version="true"></script>
+<script src="/lib/crypto-js/aes.js"></script>
+<script>
+
+    function Encrypt(id) {
+        let out = []
+        for (word of document.getElementById(id).value.split(',')) {
+            out.push(CryptoJS.AES.encrypt(word.trim(), "SQL is the best"));
+        }
+        document.getElementById(id).value = out.join(', ');
+    }
+
+    function SubmitForm() {
+        $("#form1 input, #form1 textarea").not('input[type=button], input[type=submit], input[type=reset]').each((index, element) => {
+            element.value = SanitizeHTMLParsons(element.value);
+        });
+        $.ajax({
+            type: 'POST',
+            url: window.location,
+            cache: false,
+            data: $('#form1').serialize(),
+            success: () => alert('File written successfully'),
+            error: (ev, status, errorThrown) => alert(`An error has occured.\nMessage: ${ev.responseText} More Information for development: ${status}\n${errorThrown}`),
+            dataType: 'text'
+        });
+        $("#form1 input, #form1 textarea").not(':input[type=button], :input[type=submit], :input[type=reset], :input[type=checkbox], :input[name$="SecretWord"]').each((index, element) => {
+            element.value = DesanitizeHTMLParsons(element.value);
+        });
+    }
+
+    function Decrypt(id) {
+        let text = document.getElementById(id);
+        let words = text.value.split(', ');
+        for (let i = 0; i < words.length; ++i) {
+            words[i] = CryptoJS.AES.decrypt(words[i].trim(), "SQL is the best").toString(CryptoJS.enc.Utf8);
+        }
+        text.value = words.join(', ');
+    }
+    
+</script>

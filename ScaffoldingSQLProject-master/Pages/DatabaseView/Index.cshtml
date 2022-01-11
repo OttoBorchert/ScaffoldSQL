@@ -1,0 +1,38 @@
+﻿@page
+@model ScaffoldingSQLProject.Pages.Database_Page.IndexModel.DatabaseViewModel
+@{
+    ViewData["Title"] = "Database View";
+}
+<div class="card" >
+    <div class="card-header">
+        <h2>Database Upload</h2>
+    </div>
+    <div class="card-body">
+        <form class="card-body" method="POST" onsubmit="return SubmitForm()">
+            <input asp-for="DatabaseFile" type="file" />
+            <span asp-validation-for="DatabaseFile"></span>
+            <button asp-page-handler="Upload" class="btn btn-primary" type="submit" value="Upload">Upload Database</button>
+        </form>
+
+        <script>
+            function SubmitForm() {
+                $.ajax({
+                    type: "POST",
+                    url: window.location,
+                    enctype: 'multipart/form-data',
+                    data: new FormData($("form")[0]),
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    success: () => {
+                        alert("File written successfully");
+                    },
+                    error: (ev) => {
+                        alert(`An error hass occured: ${ev.responseText}`);
+                    }
+                });
+                return false;
+            }
+        </script>
+    </div>
+</div>
