@@ -1,0 +1,73 @@
+Test Question for unit testing - 2.333
+true
+false
+
+
+
+
+
+L R 1
+
+
+L C 2
+
+V 3,4 == Cell Value
+
+
+
+
+
+
+
+C 5 == Column Name
+Parsons
+
+
+
+
+WHERE age &gt;= 25
+
+
+
+SELECT *,$$toggle::AVG(age)::AVG(score)$$
+
+; 
+
+EndParsons
+StartDatabase
+
+
+chinook.db
+
+
+EndDatabase
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1

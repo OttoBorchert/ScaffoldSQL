@@ -1,0 +1,27 @@
+Test Question for unit testing - 2.333
+True
+True
+StartSecrets
+MDE=pV6TpqYlQSmlzLLJ8OnC1A==Maj7GABQFZGF039KPURNGw==nIeDOTs3r+PZ9NXHspdG5PgYkUYk+vGNLf1/m2iTKSctg8jmtK8V7HvnFK9RRnia
+MDE=0TT7YaXmq9l6RkHSBJlyYw==6EjyihXvtuO+B938gPRMaQ==Q40UBEnO3q2KpQOH2VPCFEViAihIuNkzx/tHm3dsms4EvwOWyaG2rzcZF7r8UfXc
+MDE=Nf5A1l8eZtQsNud1sAfawg==bBhHdcx2p0xbsuh6z/EN4Q==N4hheDo2k7n73fa8KukM8RixU8Olye5LBcnI/OXZ86nzaYHgT0M/s7nj2v+Oml5y
+EndSecrets
+StartParsonsSecrets
+MDE=8X/TZ0xaSNm6Utm5ECNZuw==Saov+5a73IbiMPe5tFRZuw==cRbKqqSkFOfXkPOqwSlbqD2s/OgJUZHm8m88tOBOktlFlTgvzScRoZ1OtHdXzhDZ
+MDE=BiNeimXcE3luVVfXUK+EPQ==Y5XV8icMCm4TOa88ifTrcQ==5/np9Icbh/kPGRORinX4tHi30KF74CqRbrEYTvN8T85INNc02UHMd592UCWhwk4w
+MDE=eAT6/R280a2M5l0cR2fL5A==B+P1EENSfIEyRjznJwX7zA==sz1JJ49L9B9gCSLRpIDMNPFQkAkck0nFeihIbVbDyLV7BUyq+Y/x2Vg1W5W4/hg/
+MDE=jNThLzYh+0rrrrHmRVkG9A==6lJxtem1+SNrEbTS4nbWag==TDTupGorOKYSDKxo2ETCZIAUFu9X7kMN/mAJlrFV8Q4oFMEOf/ndBQWpsAiwKPIF
+EndParsonsSecrets
+L R 1
+L C 2
+V 3,4 == Cell Value
+C 5 == Column Name
+Parsons
+WHERE age &gt;= 25
+SELECT *,$$toggle::AVG(age)::AVG(score)$$
+; 
+EndParsons
+StartDatabase
+chinook.db
+EndDatabase
+1

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <IsPublishable>false</IsPublishable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ScaffoldingSQLProject-master\ScaffoldingSQLProject.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestResources\databases\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestResources\questions\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestResources\TestDatabases\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="TestResources\databases\fantasy.db" />
+    <None Remove="TestResources\questions\ValidFullyPopulatedAbsurd.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TestResources\TestDatabases\">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Folder>
+    <Folder Include="TestResources\databases\">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Folder>
+  </ItemGroup>
+
+</Project>

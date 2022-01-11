@@ -1,0 +1,30 @@
+@startuml FileController API Implementation
+!theme mars
+skinparam component {
+    FontColor<<transparent>> transparent
+    BorderColor<<transparent>> transparent
+    BackgroundColor<<transparent>> transparent
+    FontSize<<transparent>> 0
+}
+
+title FileController API Implementation
+
+class FileController extends Controller {
+	- {static} JsonResult HandleMalformedForm(HttpRequest, HttpResponse, stirng, Func<string, bool>, Func<string, JsonResult>, string, int)
+	- {static} JsonResult Handle404(HttpResponse, Func<bool>, Func<JsonResult>, string, int, Action, Action, Func<bool>, string, int)
+	+ JsonResult OnGetDatabaseBytes(string)
+	+ JsonResult OnGetDatabaseList()
+	+ JsonResult OnGetDataBaseListSimple()
+	+ JsonResult OnGetAllQuestions()
+	+ JsonResult OnGetFileList()
+	+ JsonResult OnGetFileListSimple()
+	+ JsonResult OnGetQuestionContents(string)
+	+ JsonResult OnGetQuestionExists()
+	+ JsonResult OnGetQuestionsFromUnit(string)
+	+ JsonResult OnGetUnitNumbers()
+	+ JsonResult OnPostGetQuestionContents()
+	+ JsonResult OnPostSecretWord()
+	+ JsonResult OnPostSecretWordParsons()
+}
+
+@enduml

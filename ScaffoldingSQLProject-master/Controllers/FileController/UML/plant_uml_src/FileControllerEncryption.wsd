@@ -1,0 +1,20 @@
+@startuml FileController Encryption
+!theme mars
+skinparam component {
+    FontColor<<transparent>> transparent
+    BorderColor<<transparent>> transparent
+    BackgroundColor<<transparent>> transparent
+    FontSize<<transparent>> 0
+}
+
+title FileController Encryption
+
+class FileController extends Controller {
+	- byte p_encryptionVersionNumber
+	- {static} string VersionNumberToBase64()
+	- {static} string VersionNumberFromBase64(string)
+	+ {static} string[] Encrypt(string[])
+	+ {static} string[] Decrypt(string[])
+}
+
+@enduml

@@ -1,0 +1,21 @@
+test
+False
+False
+StartSecrets
+Test
+1
+2
+EndSecrets
+StartParsonsSecrets
+U2FsdGVkX1/0IShxQPtTBSqGtd4Dl7E9s08nNc8ewmo=
+U2FsdGVkX1+SFYSD2Fmx1i6Qvye3VzWl94yovoQE7ZA=
+U2FsdGVkX1+DIyhevk+AwdfGLt8x20hBrcK2pbLxuoQ=
+U2FsdGVkX1+NGncmIzv0FWN0KCfaVH/uzFOFNGOWkx0=
+EndParsonsSecrets
+L R 
+L C 
+Parsons
+EndParsons
+StartDatabase
+simpleDictionary.db
+EndDatabase
