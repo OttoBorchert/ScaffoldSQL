@@ -14,8 +14,6 @@ V 0,6 == 200
 V 2,0 == 30
 V 2,1 == Shimmering Light
 V 2,6 == 400
-Parson
-SELECT $$toggle::*::playerId::minLevel$$ ,$$toggle::*::playerId::type$$\n
-FROM $$toggle::Players::Guilds::Items$$;\n
-            
- 
+Parsons
+SELECT $$toggle::*::playerId::minLevel$$, $$toggle::*::playerId::type$$
+FROM $$toggle::Players::Guilds::Items$$

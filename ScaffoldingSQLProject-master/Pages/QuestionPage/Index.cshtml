@@ -1,7 +1,6 @@
 ﻿@page
 @model CapstoneIdeas.Pages.QuestionPage2.IndexModel
 @{
-    ViewData["Title"] = "The Best Test";
 }
 
 <meta charset="utf8">
@@ -59,7 +58,8 @@
 <body>
     <h1>ScaffoldSQL</h1>
     <main>
-        <label id='prompt' class='nohint' for='commands'>Enter some SQL</label>
+        <!-- This is the Question label -->
+        <label id='prompt' class='nohint' for='commands'></label>
         <br class='nohint'>
         @Html.AntiForgeryToken()
         <div id='hint_area' style='display: none;'>
@@ -69,6 +69,7 @@
                 values by clicking them. You don't necessarily need to use all of the lines.
             </p>
             <div id='questionOutputHint' class='questionOutputHint'>Question will be displayed here</div>
+            <p></p>
             <div id='sortableTrash' class='sortable-code'>
                 <p>Trash</p>
             </div>
@@ -92,17 +93,15 @@
             <script src="/lib/skulpt-stdlib.js"></script>
         </div>
 
-        <div id='questionOutputNoHint' class='questionOutputNoHint'>Question will be displayed here</div>
-        <textarea class='nohint' id="commands">SELECT * &#013; FROM Players;</textarea>
-        <button id='execute' class='nohint button'>Execute</button>
-        <button id='refresh' class='refresh button' onClick='clearAllOutputs()'>Clear Outputs</button>
-        <button id='showTables' class='tables button' onClick="showTables();">Show Database Information</button>
-        <button id='hint' class='nohint button invisible' onClick="removeExtraButtons();">Hint</button>
+        <div id="noHintArea" class="noHintArea">
+            <div id='questionOutputNoHint' class='questionOutputNoHint'>Question will be displayed here</div>
+            <textarea class='nohint' id="commands">SELECT * &#013; FROM Players;</textarea>
+            <button id='execute' class='nohint button'>Execute</button>
+            <button id='refresh' class='refresh button' onClick='clearAllOutputs()'>Clear Outputs</button>
+            <button id='showTables' class='tables button' onClick="showTables();">Show Database Information</button>
+            <button id='hint' class='nohint button invisible' onClick="removeExtraButtons();">Hint</button>
+        </div>
         <!-- If hint is clicked remove refresh button -->
-        <!--
-    <button id='savedb' class="button">Save the db</button>
-    <label class="button">Load an SQLite database file: <input type='file' id='dbfile'></label>
-    -->
         <p></p>
         <div id='error' class='error'></div>
         <div id='testcase_output' class='testcase_output'>
@@ -148,16 +147,16 @@
         const params = new URLSearchParams(window.location.search);
         if (params.has('q')) {
             question = params.get('q');
-            document.getElementById("prompt").innerHTML = "Enter Some SQL for Question: " + question
+            document.getElementById("prompt").innerHTML = "Question: " + question
             let url = question + '.txt';
             $.ajax({
                 type: 'GET',
                 // Call the FileController to get the Question Contents
                 url: `FileController/GetQuestion/${url}`,
                 success: function (results) {
+                    parsonProblem = results.Parsons.join('\n');
                     readQuestions(results);
                     questionData = results;
-                    parsonProblem = results.Parsons.join('\n');
                 }
             });
         } else {
@@ -171,17 +170,48 @@
             document.getElementById("questionOutputNoHint").innerHTML = result.Question;
             // outputs the question above the Parson Problem draggables
             document.getElementById("questionOutputHint").innerHTML = result.Question;
-            //var sendQuestion = function (questionOutput);
-            //return this.questionOutput
-            // Reads and removes the first string containing whether parsons problem/hint button is on or off
-            // and assigns it to parsonInterfaceInput
-            // takes parsonInterfaceInput string and makes it lowercase
-            console.log("parsons interface is " + result.ParsonsEnable);
-            // While the question page is bieng loaded, if parsonInterace string contains "true", after one free form
+
+            // While the question page is being loaded, if parsonInterace string contains "true", after one free form
             // text is attempted, the hint button is made visible after one free form text attempt
-            // This has to be done while the page is bieng loaded
+            // This has to be done while the page is being loaded
             if (result.ParsonsEnable) {
                 $("#hint").removeClass("invisible");
+            }
+            // This allows an instructor to only use the Parson's interface
+            if (!result.TestCaseEnable) {
+                // If we want to disable the free-form interface, we need to 
+                // hide the CodeMirror editor and show the Parson's Problem area
+                $("#noHintArea").hide();
+                $("#hint_area").show();
+
+                //And initialize the Parson's Problem - This is the same code as in scaffold_sql.js
+                // initializeParsonsProblem(), but I'm not sure how to run that code if it hasn't been
+                // loaded yet - ojb 2022-01-16
+                var initial = parsonProblem;
+
+                $(document).ready(function () {
+                    var parson = new ParsonsWidget({
+                        'sortableId': 'sortable',
+                        'trashId': 'sortableTrash',
+                        'vartests': [],
+                        lang: "en",
+                        'grader': ParsonsWidget._graders.LanguageTranslationGrader,
+                        'executable_code': initial,
+                        'programmingLang': "pseudo",
+                        can_indent: false
+                    });
+                    parson.init(initial);
+                    parson.shuffleLines();
+                    $("#newInstanceLink").click(function (event) {
+                        event.preventDefault();
+                        parson.shuffleLines();
+                    });
+                    $("#feedbackLink").click(function (event) {
+                        executable_code = parson.grader._replaceCodelines()
+                        console.log(executable_code);
+                        execute(executable_code + ';');
+                    });
+                });
             }
             // For now, hardcode the first element.
             loadBookDB(result.Database[0]);

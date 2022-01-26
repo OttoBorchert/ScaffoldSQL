@@ -566,6 +566,10 @@ function hintClicked() {
         hintExecuteTimestamp = new Date().toLocaleString('en-US', 'best-fit', 'short');
     }
 
+    initializeParsonsProblem();
+}
+
+function initializeParsonsProblem() {
     var initial = parsonProblem;
 
     $(document).ready(function () {
@@ -593,19 +597,13 @@ function hintClicked() {
     });
 
     //Remove the SQL interpreter
-
     var hintAreaElm = document.getElementById("hint_area");
     if (hintAreaElm.style.display === "none") {
         hintAreaElm.style.display = "block";
     } else {
         hintAreaElm.style.display = "none";
     }
-    [].forEach.call(document.querySelectorAll('.nohint'), function (el) {
-        el.style.display = 'none';
-    });
-    [].forEach.call(document.querySelectorAll('.CodeMirror'), function (el) {
-        el.style.display = 'none';
-    });
+    $("#noHintArea").hide();
 }
 
 
@@ -637,7 +635,7 @@ window.addEventListener('load', () => InitCodeMirror());
  */
 function InitCodeMirror(tableData = null) {
     tableData = tableData ?? {};
-    // Assing to global variable
+    // Assign to global variable
     editor = CodeMirror.fromTextArea(commandsElm, {
         mode: 'text/x-sql',
         viewportMargin: Infinity,
@@ -656,7 +654,7 @@ function InitCodeMirror(tableData = null) {
         }
     });
 
-    // Assign to window.editor (unsure if this actually does anything, but it is done in teh official CodeMirror exmaple)
+    // Assign to window.editor (unsure if this actually does anything, but it is done in the official CodeMirror exmaple)
     window.editor = editor;
 }
 
