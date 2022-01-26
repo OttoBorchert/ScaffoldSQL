@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp5.0</TargetFramework>
     <IsPublishable>false</IsPublishable>
     <IsPackable>false</IsPackable>
+    <Configurations>Debug;Release;UserNoHeader</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

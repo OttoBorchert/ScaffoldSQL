@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
-    <Configurations>Debug;Release;Admin</Configurations>
+    <Configurations>Debug;Release;Admin;UserNoHeader</Configurations>
     <RuntimeIdentifiers>win-x64;win-x86;osx-x64;linux-x64</RuntimeIdentifiers>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <PublishSingleFile>true</PublishSingleFile>
+    <PublishSingleFile>false</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
@@ -16,11 +16,15 @@
     <DefineConstants>TRACE;DEBUG;DEBUG, ADMIN</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Admin|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;ADMIN</DefineConstants>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Admin|AnyCPU'">
+		<DefineConstants>TRACE;DEBUG;ADMIN</DefineConstants>
+	</PropertyGroup>
 
-  <ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UserNoHeader|AnyCPU'">
+		<DefineConstants>TRACE;DEBUG;NO_HEADER</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
     <Compile Remove="wwwroot\lib\codemirror-5.64.0\bin\**" />
     <Compile Remove="wwwroot\lib\codemirror-5.64.0\demo\**" />
     <Compile Remove="wwwroot\lib\codemirror-5.64.0\doc\**" />

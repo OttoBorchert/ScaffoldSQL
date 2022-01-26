@@ -58,6 +58,7 @@
         </div>
     </div>
 
+    @{ #if !NO_HEADER }
     <header>
         <nav id="primary_navbar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -92,6 +93,8 @@
             </div>
         </nav>
     </header>
+    @{ #endif }
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -100,7 +103,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - ScaffoldingSQL -
+            &copy; 2021-2022 ScaffoldSQL -
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ossLicense">
                 Open Source Licenses
             </button>

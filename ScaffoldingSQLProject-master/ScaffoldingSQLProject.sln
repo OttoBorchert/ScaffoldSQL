@@ -12,6 +12,7 @@ Global
 		Admin|Any CPU = Admin|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		UserNoHeader|Any CPU = UserNoHeader|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2398F10E-2B68-41EF-9751-A32C3342C8A1}.Admin|Any CPU.ActiveCfg = Admin|Any CPU
@@ -20,12 +21,16 @@ Global
 		{2398F10E-2B68-41EF-9751-A32C3342C8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2398F10E-2B68-41EF-9751-A32C3342C8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2398F10E-2B68-41EF-9751-A32C3342C8A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2398F10E-2B68-41EF-9751-A32C3342C8A1}.UserNoHeader|Any CPU.ActiveCfg = UserNoHeader|Any CPU
+		{2398F10E-2B68-41EF-9751-A32C3342C8A1}.UserNoHeader|Any CPU.Build.0 = UserNoHeader|Any CPU
 		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.Admin|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.Admin|Any CPU.Build.0 = Debug|Any CPU
 		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.UserNoHeader|Any CPU.ActiveCfg = UserNoHeader|Any CPU
+		{BFB34551-E8E7-4942-B98F-6A5C0364AF43}.UserNoHeader|Any CPU.Build.0 = UserNoHeader|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
