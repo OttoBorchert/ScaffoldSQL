@@ -168,18 +168,22 @@ var checkIncorrectAnswer = function (result, parsonInterface) {
         attempts += 1;
         console.log("You have answered a question correctly, it only took " + attempts + " times");
 
-        //if the quesiton is answered correctly the first time without clicking the hint button, you cannot continue to spam click 
+        //if the question is answered correctly the first time without clicking the hint button, you cannot continue to spam click 
         //the buttons that writes to the firebase
         $("#execute").hide();
         $("#hint").hide();
         $("#showTables").hide();
         $("#refresh").hide();
 
+        if (!questionData.TextAreaEnable) {
+            hintCalled = true;
+        }
+
         //hint button was not clicked
-        if (hintCalled === false) {
+        if (hintCalled === false && questionData.TextAreaEnable) {
             //write_Attempt_To_FireBase(attempts);
             write_Execute_Timestamp_To_FireBase(hintCalled, attempts, newQuestionO, questionNumber);
-        }
+        } 
         //hint button was clicked and is answered correctly, hide reshuffle and execute button for hint area
         else {
             //write_Attempt_To_FireBase(attempts);
@@ -364,12 +368,16 @@ var checkAsserts = function (result_table, test_list) {
         $.ajax({
             type: 'POST',
             url: hintCalled ? 'FileController/SecretWord/Parsons' : 'FileController/SecretWord',
+            //headers: { __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val() },
             data: {
-                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val(),
+                //__RequestVerificationToken: $('[name="__RequestVerificationToken"]').val(),
+                contentType: "application/txt; charset=utf-8", 
+                dataType: "text", 
                 File: questionData.File
             },
             success: ev => OnAjaxSuccess(result, ev, parsonInterface),
-            error: ev => alert(`An error has occured. Please try again later. More information: ${ev.responseText}`)
+            //error: ev => alert(`An error has occured. Please try again later. More information: ${ev.responseText}`)
+            error: ev => console.log(ev)
         })
     }
 

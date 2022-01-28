@@ -209,7 +209,8 @@ namespace ScaffoldingSQLProject.Controllers
         // Status Codes: 200, 400, 404 
         [Route("FileController/SecretWord")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
+      [IgnoreAntiforgeryToken]
+      //[ValidateAntiForgeryToken]
         public JsonResult OnPostSecretWord() =>
             HandleMalformedForm(
                 Request,
@@ -223,7 +224,8 @@ namespace ScaffoldingSQLProject.Controllers
         // Status Codes: 200, 400, 404 
         [Route("FileController/SecretWord/Parsons")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
+      [IgnoreAntiforgeryToken]
+      //[ValidateAntiForgeryToken]
         public JsonResult OnPostSecretWordParsons() =>
             HandleMalformedForm(
                 Request,

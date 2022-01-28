@@ -113,9 +113,9 @@
         <pre id='output'>Database output will be displayed here</pre>
     </main>
 
-    <script type="text/javascript" src="~/js/scaffold_sql.js"></script>
-    <script type="text/javascript" src="~/js/sql.js"></script>
-    <script type="text/javascript" src="~/dist/worker.sql-wasm-debug.js"></script>
+    <script type="text/javascript" src="/js/scaffold_sql.js"></script>
+    <script type="text/javascript" src="/js/sql.js"></script>
+    <script type="text/javascript" src="/dist/worker.sql-wasm-debug.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -178,7 +178,7 @@
                 $("#hint").removeClass("invisible");
             }
             // This allows an instructor to only use the Parson's interface
-            if (!result.TestCaseEnable) {
+            if (!result.TextAreaEnable) {
                 // If we want to disable the free-form interface, we need to 
                 // hide the CodeMirror editor and show the Parson's Problem area
                 $("#noHintArea").hide();
