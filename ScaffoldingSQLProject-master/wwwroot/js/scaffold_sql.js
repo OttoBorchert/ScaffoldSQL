@@ -221,11 +221,28 @@ var checkIncorrectAnswer = function (result, parsonInterface) {
     */
 }
 
+String.prototype.hashCode = function () {
+    var hash = 0, i, chr;
+    if (this.length === 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        chr = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+};
+
 var write_Execute_Timestamp_To_FireBase = function (called, attempts, questionOutput, questionNumber, result) {
 
     var executeTime = window.writeExecTime;
 
+    var allCookies = document.cookie;
+    //Creating a hash out of the session cookie, to hopefully track an individual's attempts, at least a little bit
+    var userHash = allCookies.hashCode();
+
+
     var parsonsData = {
+        UserHash: userHash,
         ExecuteTimestamp: executeTime,
         Parson: called,
         Attempts: attempts,
@@ -250,8 +267,14 @@ var write_Hint_And_Execute_Timestamps_To_FireBase = function (called, attempts, 
     var executeTime = window.writeExecTime;
     var writeHintTime = window.hintExecuteTimestamp;
 
+    var allCookies = document.cookie;
+    //Creating a hash out of the session cookie, to hopefully track an individual's attempts, at least a little bit
+    var userHash = allCookies.hashCode();
+
+
     //This data var, you fill out what you want to add to the database
     var attemptsData = {
+        UserHash: userHash,
         ExecuteTimestamp: executeTime,
         HintTimestamp: writeHintTime,
         Parson: called,

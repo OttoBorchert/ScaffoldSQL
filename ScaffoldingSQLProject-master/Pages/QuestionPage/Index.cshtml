@@ -3,6 +3,10 @@
 @{
 }
 
+@using Microsoft.AspNetCore.Http
+@{HttpContext.Session.SetString("Test", "Test");};
+
+
 <meta charset="utf8">
 <title>ScaffoldSQL: Learning SQL via test cases and Parson's problems</title>
 <link rel="stylesheet" href="~/lib/codemirror-5.64.0/lib/codemirror.css">
@@ -179,7 +183,7 @@
             }
             // This allows an instructor to only use the Parson's interface
             if (!result.TextAreaEnable) {
-                // If we want to disable the free-form interface, we need to 
+                // If we want to disable the free-form interface, we need to
                 // hide the CodeMirror editor and show the Parson's Problem area
                 $("#noHintArea").hide();
                 $("#hint_area").show();
@@ -217,7 +221,7 @@
             loadBookDB(result.Database[0]);
         }
 
-        var removeExtraButtons = function() {
+        var removeExtraButtons = function () {
             document.getElementById('refresh').style.display = 'none';
             document.getElementById('showTables').style.display = 'none';
         }

@@ -23,8 +23,18 @@ namespace CapstoneIdeas
       // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
       {
+         services.AddDistributedMemoryCache();
+
+         services.AddSession(options =>
+         {
+            options.IdleTimeout = TimeSpan.FromSeconds(10);
+            options.Cookie.HttpOnly = false;
+            options.Cookie.IsEssential = true;
+         });
+
          services.AddRazorPages();
          services.AddControllers();
+
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +45,7 @@ namespace CapstoneIdeas
             context.Response.Headers.Add("X-Frame-Options", "ALLOW-FROM https://app.tophat.com");
             await next();
          });
+
 
          if (env.IsDevelopment())
          {
@@ -53,6 +64,8 @@ namespace CapstoneIdeas
          app.UseRouting();
 
          app.UseAuthorization();
+
+         app.UseSession();
 
          app.UseEndpoints(endpoints =>
          {
