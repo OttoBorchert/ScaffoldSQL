@@ -18,6 +18,7 @@ worker.onerror = error;
 var attempts = null;
 var hintCalled = false;
 var questionOutput = "";
+var userAnswer = "";
 
 var writeExecTime = "";
 var hintExecuteTimestamp = "";
@@ -121,6 +122,7 @@ function execute(commands, shallRunAsserts = true) {
         toc("Displaying results");
     }
 
+    userAnswer = commands; // This variable is used by firebase to store what the user entered as their SQL statement
     worker.postMessage({ action: 'exec', sql: commands });
     outputElm.textContent = "Fetching results...";
 }
@@ -151,16 +153,23 @@ var checkIncorrectAnswer = function (result, parsonInterface) {
     //var writeExecTime = window.executeTimestamp;
     // console.log("The execute timestamp is " + writeExecTime);
 
-    var writeHintTime = window.hintExecuteTimestamp;
+    //var writeHintTime = window.hintExecuteTimestamp;
     // console.log("This hint timestamp is " + writeHintTime);
 
     // console.log("QuestionO is " + newQuestionO);
     const subString = "100%";
 
+    if (!questionData.TextAreaEnable) {
+        hintCalled = true;
+    }
+
+
     //if result does not contain '100%', increment attempts and print to console
     if (!result.includes(subString)) {
         // console.log("Not a 100%, sorry!");
         attempts += 1;
+        write_Hint_And_Execute_Timestamps_To_FireBase(hintCalled, attempts, newQuestionO, questionNumber, result);
+
         // console.log("You have answered a question incorrectly " + attempts + " times.");
     }
     //else result includes the substring of '100%' in results/answer is correct
@@ -175,26 +184,26 @@ var checkIncorrectAnswer = function (result, parsonInterface) {
         $("#showTables").hide();
         $("#refresh").hide();
 
-        if (!questionData.TextAreaEnable) {
-            hintCalled = true;
-        }
 
         //hint button was not clicked
         if (hintCalled === false && questionData.TextAreaEnable) {
             //write_Attempt_To_FireBase(attempts);
-            write_Execute_Timestamp_To_FireBase(hintCalled, attempts, newQuestionO, questionNumber);
+            write_Execute_Timestamp_To_FireBase(hintCalled, attempts, newQuestionO, questionNumber, result);
         } 
         //hint button was clicked and is answered correctly, hide reshuffle and execute button for hint area
         else {
             //write_Attempt_To_FireBase(attempts);
             $("#feedbackLink").addClass("invisible");
             $("#newInstanceLink").addClass("invisible");
-            write_Hint_And_Execute_Timestamps_To_FireBase(hintCalled, attempts, newQuestionO, questionNumber);
+            write_Hint_And_Execute_Timestamps_To_FireBase(hintCalled, attempts, newQuestionO, questionNumber, result);
             console.log("You hit hint button " + hintCalled);
         }
 
         attempts = 0;
     }
+
+    /* 
+    // Removing automatic hint forwarding for experiment
 
     //if attempts == 5 and the hint button was not clicked, click the hint button. Test case interface informs Parsons interface
     if (attempts == 5 && hintCalled == false && parsonInterface == false) {
@@ -209,9 +218,10 @@ var checkIncorrectAnswer = function (result, parsonInterface) {
         //write_Hint_And_Execute_Timestamps_To_FireBase(hintCalled, attempts, newQuestionO, questionNumber);
         // console.log("You have answered a question incorrectly " + attempts + " times.");
     }
+    */
 }
 
-var write_Execute_Timestamp_To_FireBase = function (called, attempts, questionOutput, questionNumber) {
+var write_Execute_Timestamp_To_FireBase = function (called, attempts, questionOutput, questionNumber, result) {
 
     var executeTime = window.writeExecTime;
 
@@ -220,8 +230,11 @@ var write_Execute_Timestamp_To_FireBase = function (called, attempts, questionOu
         Parson: called,
         Attempts: attempts,
         Question: questionOutput,
-        QuestionNumber: questionNumber
+        QuestionNumber: questionNumber,
+        StudentAnswer: userAnswer,
+        TestCaseResult: $(".testcase_summary").html()
     }
+    console.log(parsonsData);
 
     var string = "entry";
 
@@ -229,7 +242,7 @@ var write_Execute_Timestamp_To_FireBase = function (called, attempts, questionOu
     ref.push(parsonsData);
 }
 
-var write_Hint_And_Execute_Timestamps_To_FireBase = function (called, attempts, questionOutput, questionNumber) {
+var write_Hint_And_Execute_Timestamps_To_FireBase = function (called, attempts, questionOutput, questionNumber, result) {
 
     //this.attempts = window.attempts
     // console.log("This is attempts in writeAttempts " + attempts);
@@ -244,8 +257,12 @@ var write_Hint_And_Execute_Timestamps_To_FireBase = function (called, attempts, 
         Parson: called,
         Attempts: attempts,
         Question: questionOutput,
-        QuestionNumber: questionNumber
+        QuestionNumber: questionNumber,
+        StudentAnswer: userAnswer,
+        TestCaseResult: $(".testcase_summary").html()
     }
+    console.log(attemptsData);
+
 
     var string = "entry";
     var ref = database.ref('parsons').child(string);
@@ -359,7 +376,7 @@ var checkAsserts = function (result_table, test_list) {
         code = Decryption(CodeSelector(code.split(', ')));
         testCaseElm.innerHTML += `<div class="testcase_summary">Codeword is ${code}</div>`
         console.log(`This is the code word: ${code}`);
-        checkIncorrectAnswer(result, parsonInterface);
+        //checkIncorrectAnswer(result, parsonInterface);
     }
 
     // If the answer is correct

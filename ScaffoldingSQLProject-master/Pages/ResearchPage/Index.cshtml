@@ -87,7 +87,7 @@
 
         var student = 0;
 
-        function addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts) {
+        function addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts, StudentAnswer, TestCaseResult) {
             var ul = document.getElementById("list");
             var header = document.createElement("h2");
 
@@ -97,6 +97,9 @@
             var _HintTimestamp = document.createElement("li");
             var _ExecuteTimestamp = document.createElement("li");
             var _Attempts = document.createElement("li");
+            var _StudentAnswer = document.createElement("li");
+            var _TestCaseResult = document.createElement("li");
+
 
             header.innerHTML = "Student - " + (++student);
 
@@ -106,6 +109,9 @@
             _HintTimestamp.innerHTML = "Hint Timestamp: " + HintTimestamp;
             _ExecuteTimestamp.innerHTML = "Execute Timestamp: " + ExecuteTimestamp;
             _Attempts.innerHTML = "Attempts: " + Attempts;
+            _StudentAnswer.innerHTML = "Student Answer: " + StudentAnswer;
+            _TestCaseResult.innerHTML = "Result from Test Cases: " + TestCaseResult;
+
 
             ul.appendChild(header);
             ul.appendChild(_QuestionNumber);
@@ -114,6 +120,8 @@
             ul.appendChild(_HintTimestamp);
             ul.appendChild(_ExecuteTimestamp);
             ul.appendChild(_Attempts);
+            ul.appendChild(_StudentAnswer);
+            ul.appendChild(_TestCaseResult);
         }
         //Clear List for no duplicates
         function ClearList() {
@@ -136,11 +144,13 @@
                         let HintTimestamp = ChildSnapshot.val().HintTimestamp;
                         let ExecuteTimestamp = ChildSnapshot.val().ExecuteTimestamp;
                         let Attempts = ChildSnapshot.val().Attempts;
+                        let StudentAnswer = ChildSnapshot.val().StudentAnswer;
+                        let TestCaseResult = ChildSnapshot.val().TestCaseResult;
                         if (!(QuestionNumber in questions)) {
                             questions[QuestionNumber] = { "true": 0, "false": 0 };
                         }
                         questions[QuestionNumber][Parson] += Attempts;
-                        addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts);
+                        addItemsToList(QuestionNumber, Question, Parson, HintTimestamp, ExecuteTimestamp, Attempts, StudentAnswer, TestCaseResult);
                         document.getElementById("Search").value = "";
                     }
                 );
