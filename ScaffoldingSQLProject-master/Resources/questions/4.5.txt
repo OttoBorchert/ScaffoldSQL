@@ -1,11 +1,22 @@
-Write an SQL query that lists the player levels in the game (and only the levels). Make sure it has no duplicates.
+Write an SQL query to display the number of coins held by all members of the Shocking Power guild. (Hint&colon; Shocking Power&apos;s guildID is 20)
+False
 True
 True
-U2FsdGVkX19Cuc5CJg5CxrxwSoI9LrcdK/9exgNJ3Yk=
-U2FsdGVkX1/HkKElhieYtuEvzaIB+hUE5N8WAvTvGak=   
-L R 15
+StartSecrets
+MDE=A8O8tY/DUDr+92MjnJrWzw==RkDtEdZWV/Z/miwxc7rtMA==6Lc/KStXiDXYV8kwbwKF6L3qlnuSRXKEeQnnax9XP80Eb/VYSmy3A3hNz+xfSxv6
+EndSecrets
+StartParsonsSecrets
+MDE=0ztBjrVnpyYjIMF2T1rs6w==dFLg3Fi1s2vDY6RpHbnOXw==0JJCa4kmleepx9QssE2AeY2VZgXytH1KWLY9EyCe6j10XoEq8Z1J8OiA448XQXMc
+EndParsonsSecrets
+L R 1
 L C 1
-C 0 == playerLevel
-V 0,0 == 1
-V 6,0 == 8
-V 14,0 == 21
+V 0,0 == 3094
+Parsons
+SELECT $$toggle::*::COUNT(coins)::SUM(*)::SUM(coins)::SUM(playerLevel)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::playerID::playerName::playerLevel::guildID::coins$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::30::NULL::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

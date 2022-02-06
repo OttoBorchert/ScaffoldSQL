@@ -1,0 +1,26 @@
+Write an SQL query to list all of the unique item minimum levels in the game (i.e. Just display minimum levels without duplicates). Sort the table so the highest level comes first.
+False
+True
+True
+StartSecrets
+MDE=hRJu7hBKZ9knBZmVefhstg==DJNqOavqNTQYwHlP6zBaUA==Eqznzi3Y8DDGx/FB6RLinl3/7czV9CBhdnMdn3yA6qUZ0uCheR84BGfoXUvdx6fy
+EndSecrets
+StartParsonsSecrets
+MDE=Ivppb1FfKglDWU0GumVjOg==TxNhZ5hf2VtZKs41fiEiWw==2Fh5+XGipu3dV53jwEUzVGBWXvEjt72rur2dcL5Yl4RPxoO4q4Yj283519oEXZtt
+EndParsonsSecrets
+L R 8
+L C 1
+V 0,0 == 18
+V 2,0 == 10
+V 4,0 == 7
+Parsons
+SELECT $$toggle::*::minLevel::SUM(minLevel)::COUNT(minLevel)::SUM(minLevel)::type$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::minLevel::itemName::MIN(minLevel)::MIN(itemName)$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::'axe'::NULL::NOT NULL$$
+GROUP BY $$toggle::type::SUM(type)::COUNT(type)::minLevel::SUM(minLevel)::COUNT(minLevel)$$
+ORDER BY $$toggle::type::SUM(type)::COUNT(type)::minLevel::SUM(minLevel)::COUNT(minLevel)$$ $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

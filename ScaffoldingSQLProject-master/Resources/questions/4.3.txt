@@ -1,9 +1,22 @@
-Write an SQL query to display only the number of axes, along with the text of the axe type. Hint: You should only need to add a WHERE clause to the query in this section.
+Write a query to count the number of items in the game, but label the field Total Items.
+False
 True
 True
-U2FsdGVkX18VULhkKhNB8Nhtltntvy1nJ0d/jz65iXc=
-U2FsdGVkX1/84EcPhh0Z4z7oCb37LVApGcfGYy0gb60=  
+StartSecrets
+MDE=dh6u7Pbx3tsiBUdFqWKcqQ==dSIcm23S7364VQ4Q6uwxCA==ecEOuuq5xbzrC3bBQOv7QAbkL9hCejqJ+FQqaKIj/2u+OeqvEmAizPP3kG/Plzwb
+EndSecrets
+StartParsonsSecrets
+MDE=nNHYmhpiZEReulpN/Nuczg==jb6HpAHkWocAuRwwFWKjCw==SjmpGUVgz1xRYKe9pqXT73EGq9eg+Fq/0JSYdS5ECUeB6033XGMsnbAAvIDCNU0K
+EndParsonsSecrets
 L R 1
-L C 2
-V 0,0 == 3
-V 0,1 == axe
+L C 1
+V 0,0 == 9
+C 0 == Total Items
+Parsons
+SELECT $$toggle::*::COUNT(itemID)::COUNT(itemID) AS 'Total Items'::COUNT(*)::SUM(minLevel)::COUNT(*) AS 'Total Items'$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

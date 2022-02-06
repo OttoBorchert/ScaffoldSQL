@@ -1,0 +1,22 @@
+Write an SQL query to determine the lowest &quot;minimum level&quot; axe in the game. (Hint&colon; axe is a type of Item)
+False
+True
+True
+StartSecrets
+MDE=7igmebdlT8rDJ3P8Oq4NLA==1/nixNEkP0nDmLNVLemOuA==pvjDB7WQPaC6NF83/qGuddYo8/GiDbsbdbQoRyC53+5DGIqC+Au7WaZw60N2+jWd
+EndSecrets
+StartParsonsSecrets
+MDE=pTK5QhNUgHYj4fVwc/gpGA==5efydObbIIuNmMVIFtadMw==VO64P+uufQOqihMUrzIAwupGTFMwBOLLOc0qcBFTM7CVQTXS2feDp8yZ7uFew/bQ
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == 8
+Parsons
+SELECT $$toggle::*::MAX(type)::MIN(type)::SUM(type)::type::MAX(minLevel)::MIN(minLevel)::SUM(minLevel)::minLevel$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::type::itemName::MIN(type)::MIN(itemName)$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::'axe'::NULL::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

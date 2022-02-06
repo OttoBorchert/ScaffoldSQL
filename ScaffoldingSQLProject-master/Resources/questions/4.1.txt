@@ -1,9 +1,21 @@
-Write a query to count the number of items in the game, but label the field Total Items.
+Write an SQL query to count the number of players in the game.
+False
 True
 True
-U2FsdGVkX183y5Jk/DA7Rh4wfzIHJDziRAOXKwvFBtQ=
-U2FsdGVkX19EGzVs1LRGhSao8/AlEVXTqb+6Bxy+TaY=   
+StartSecrets
+MDE=3jQNztc/KYycsBpm6PTdZw==4lGS+SgaFGhiftgFoSwVag==2Ho2YKdXadDkrnFRz6YWY0l5aI6xgxbAV9jrB4cNw0K1ISQrNfEjoHmUUVR4755W
+EndSecrets
+StartParsonsSecrets
+MDE=d9paWwhN8hqsPyBbHb8KVg==frcmRQN4kalMYGwcpkftxA==OVNBbiqKhPKsyOEazecySBnnByxoM2iwUAJhdZKX5Hdk7nFIMQ9yDJuVsWjG+5il
+EndParsonsSecrets
 L R 1
 L C 1
-V 0,0 == 9
-C 0 == Total Items
+V 0,0 == 19
+Parsons
+SELECT $$toggle::*::COUNT(guildID)::COUNT(*)::playerID::guildID$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

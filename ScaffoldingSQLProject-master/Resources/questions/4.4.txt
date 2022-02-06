@@ -1,10 +1,21 @@
-Write an SQL query to sort the table created in this section in reverse alphabetical order. That is, sword should come first.
+Write an SQL query that displays sum total of all of the levels achieved by all players in the game.
+False
 True
 True
-U2FsdGVkX19kUPq2B6uckxVjRTL06VWnV2XLTUcZjp0=
-U2FsdGVkX1/wEqlji11x+ooNJutXgq3zoU2tfNL/00M=   
-L R 5
+StartSecrets
+MDE=acePIzuX3INcKtD8JPSG9Q==DCQmff2ZnvHfGYHZOmQT1g==aoC18bC7KQAi4Y5oXK9AYgcDW6SgE3OouabZAUwCrn18EeWZyjwy6eeO19lUzXc0
+EndSecrets
+StartParsonsSecrets
+MDE=zB2JLBZBBHm11AN5elmhDA==pQqXqmv6TElNGUsbrqd7gQ==Uck7eZyVmztezgNFcrjb7oW+KoJd3wFWBduatOvbDPalP165wuGHc6+1TB9fdWuK
+EndParsonsSecrets
+L R 1
 L C 1
-V 0,0 == sword
-V 2,0 == dagger
-V 4,0 == axe
+V 0,0 == 159
+Parsons
+SELECT $$toggle::*::SUM(*)::playerLevel::SUM(playerLevel)::COUNT(playerLevel)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

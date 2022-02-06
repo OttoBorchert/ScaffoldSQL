@@ -66,39 +66,40 @@
         <label id='prompt' class='nohint' for='commands'></label>
         <br class='nohint'>
         @Html.AntiForgeryToken()
-        <div id='hint_area' style='display: none;'>
-            <p>
-                Construct your SQL program by dragging lines of code from the left to the right. You can change the
-                names of the (<span class="jsparson-toggle"></span>)
-                values by clicking them. You don't necessarily need to use all of the lines.
-            </p>
-            <div id='questionOutputHint' class='questionOutputHint'>Question will be displayed here</div>
-            <p></p>
-            <div id='sortableTrash' class='sortable-code'>
-                <p>Trash</p>
-            </div>
-            <div id='sortable' class='sortable-code'>
-                <p>Solution</p>
-            </div>
-            <div style='clear:both;'></div>
-            <p>
-                <button class='button' href="#" id="newInstanceLink">Reshuffle</button>
-                <button class='button' href="#" id="feedbackLink">Execute</button>
-            </p>
-            <div style='clear:both;'></div>
-            <!-- <div id="unittest"></div> -->
-            <script src="/lib/jquery.min.js"></script>
-            <script src="/lib/jquery-ui.min.js"></script>
-            <script src="/lib/jquery.ui.touch-punch.min.js"></script>
-            <script src="/lib/underscore-min.js"></script>
-            <script src="/lib/lis.js"></script>
-            <script src="/js/parsons.js"></script>
-            <script src="/lib/skulpt.js"></script>
-            <script src="/lib/skulpt-stdlib.js"></script>
+    <div id='hint_area' style='display: none;'>
+        <b><div id='questionOutputHint' class='questionOutputHint'>Question will be displayed here</div></b>
+        <p></p>
+        <p>
+            Construct your SQL program by dragging lines of code from the left to the right. You can change the
+            names of the (<span class="jsparson-toggle"></span>)
+            values by clicking them. You don't necessarily need to use all of the lines.
+        </p>
+        <p></p>
+        <div id='sortableTrash' class='sortable-code'>
+            <p>Trash</p>
         </div>
+        <div id='sortable' class='sortable-code'>
+            <p>Solution</p>
+        </div>
+        <div style='clear:both;'></div>
+        <p>
+            <button class='button' href="#" id="newInstanceLink">Reshuffle</button>
+            <button class='button' href="#" id="feedbackLink">Execute</button>
+        </p>
+        <div style='clear:both;'></div>
+        <!-- <div id="unittest"></div> -->
+        <script src="/lib/jquery.min.js"></script>
+        <script src="/lib/jquery-ui.min.js"></script>
+        <script src="/lib/jquery.ui.touch-punch.min.js"></script>
+        <script src="/lib/underscore-min.js"></script>
+        <script src="/lib/lis.js"></script>
+        <script src="/js/parsons.js"></script>
+        <script src="/lib/skulpt.js"></script>
+        <script src="/lib/skulpt-stdlib.js"></script>
+    </div>
 
         <div id="noHintArea" class="noHintArea">
-            <div id='questionOutputNoHint' class='questionOutputNoHint'>Question will be displayed here</div>
+            <b><div id='questionOutputNoHint' class='questionOutputNoHint'>Question will be displayed here</div></b>
             <textarea class='nohint' id="commands">SELECT * &#013; FROM Players;</textarea>
             <button id='execute' class='nohint button'>Execute</button>
             <button id='refresh' class='refresh button' onClick='clearAllOutputs()'>Clear Outputs</button>

@@ -172,11 +172,12 @@ let OnParsonsCommandChange = function (ev) {
         } else {
             btnAddValueSet.classList.add("hide");
         }
+        
         valueSets.dataset.showRemove = showRemoveButton;
         btnAddValueSet.dataset.placeHolder = placeholder;
         btnAddValueSet.dataset.isForTables = isForTables;
         btnAddValueSet.value = btnValue;
-        clearValueSets(id, valueSets.children, numOfValSets);
+        //clearValueSets(id, valueSets.children, numOfValSets);
     }
 
     switch (ev.srcElement.value) {
@@ -191,7 +192,7 @@ let OnParsonsCommandChange = function (ev) {
         case "USING":
             setFields(true, true, "But First", 1, "Column Name", "Add Column Set");
             break;
-        case 'SELECT': case "VALUES": case "ADD COLUMN": case "SET":
+        case 'SELECT': case "VALUES": case "ADD COLUMN": case "SET": case "FROM":
             // Unbounded value sets without table name
             setFields(false, true, "But First", 1, "Values", "Add Value Set");
             break;

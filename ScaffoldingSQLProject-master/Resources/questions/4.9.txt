@@ -1,0 +1,22 @@
+Write an SQL query to display the average level of all players in the game.
+False
+True
+True
+StartSecrets
+MDE=CQFhxUTbX5PyDqUTIiX+hw==0sMapAogIVVXj9nCB+TvDw==5qOByg/V8uLlvfEczhSyRGTL8meNnN/vO1NZOzEtWEOtP8cJd1S58zLA6uoJ7zAI
+EndSecrets
+StartParsonsSecrets
+MDE=SbLbL5Ufrkw8+3jlJM7wyA==Eh+4C1kc/GDnaY2+/VpdbQ==iiQHJsiKbGEJkWkusMYZK2OPPmlesklTcdrPiqEX5+mSQ2bQb9hTaYNpGgcaeNfE
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == 8.368421052631579
+Parsons
+SELECT $$toggle::*::AVG(coins)::AVG(playerID)::AVG(playerLevel)::AVG(guildID)::playerLevel$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::playerID::playerName::playerLevel::guildID::coins$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::30::NULL::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

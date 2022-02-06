@@ -309,7 +309,11 @@ namespace CapstoneIdeas.Pages.QuestionMaker
                 AssertHasData(TestCaseNumberOfCols, "The number of columns must be present, regardless if testcases are enabled.");
                 AssertHasData(TestCaseNumberOfRows, "The number of rows to test must be present, regardless if testcases are enabled.");
                 Question ??= "";
-                string textToBeWritten = Question + "\n" + ParsonsOn + "\n" + TestCasesON
+
+                //Hardcoding TextAreaEnable for now
+                bool TextAreaEnableOn = true;
+            
+                string textToBeWritten = Question + "\n" + TextAreaEnableOn + "\n" + TestCasesON + "\n" + ParsonsOn
                     + "\nStartSecrets\n" + Encrypt(SecretWord) + "\nEndSecrets\n"
                     + "StartParsonsSecrets\n" + Encrypt(ParsonsSecretWord) + "\nEndParsonsSecrets\nL R " +
                     TestCaseNumberOfRows + "\nL C " + TestCaseNumberOfCols + "\n";

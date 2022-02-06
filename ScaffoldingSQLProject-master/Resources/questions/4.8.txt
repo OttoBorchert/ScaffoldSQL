@@ -1,0 +1,22 @@
+Write an SQL query to display the smallest amount of coins for a single player whose level is between 5 and 8, inclusive (it includes both 5 and 8).
+False
+True
+True
+StartSecrets
+MDE=wmDLUPMIJui13FLp3iqQpA==++4X2Us4dCasni3jfxHUVw==Ukm8bN61AdJyTLbfjfBbI08Yn7hs1C9XNH/AhrRAiI1wT/6hUM/Z6Av8s7vjdmzO
+EndSecrets
+StartParsonsSecrets
+MDE=M1Zg6taPH7+Nqf71Wg3/Ow==a79KUEovIDi5qWUi1XJlKg==hqEsKRfY6wA964GPLwVc/tpJ4jE3XUDAW1VPN0AEd2WgQWEJUb8/VXnZ2LC22zsR
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == 114
+Parsons
+SELECT $$toggle::*::MAX(coins)::MIN(coins)::SUM(coins)::coins$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::coins::playerLevel::MIN(playerLevel)::MIN(coins)$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::8::5::'axe'::NULL::NOT NULL$$ $$toggle::AND::NOT::OR$$ $$toggle::coins::playerLevel::MIN(playerLevel)::MIN(coins)$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::8::5::'axe'::NULL::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

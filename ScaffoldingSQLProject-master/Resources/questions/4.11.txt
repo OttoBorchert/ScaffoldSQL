@@ -1,0 +1,25 @@
+Write an SQL query to determine the number of each type of item in the game. Only display the type name and the number of that type in that order. Only display the axes. Hint&colon; You should only have a single row with axe in the first column and 3 in the second.
+False
+True
+True
+StartSecrets
+MDE=TNWqE8TQ1yctnvuRsakIfA==3bwh/CPTPYho2WPtrmbykw==M1zY0/6f/Bt5I+zyPYFzz39M29iCT0L0Q4oeiuziUpnd99bIXtWm+vpgOZbo1gI+
+EndSecrets
+StartParsonsSecrets
+MDE=v1yY7+nBI6lgC2p+k3Artg==ERkZwk9OKm0na8Uqr7e5uQ==PWRY1uXiXaNWk075yLDr/ZladOC2UFDBnWFGCbYc4mc38P0qGUoq7AWgh3hJcG5D
+EndParsonsSecrets
+L R 1
+L C 2
+V 0,1 == 3
+V 0,0 == axe
+Parsons
+SELECT $$toggle::*::type::SUM(type)::COUNT(type)::SUM(playerLevel)$$, $$toggle::*::type::SUM(type)::COUNT(type)::SUM(playerLevel)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::type::itemName::MIN(type)::MIN(itemName)$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::'axe'::NULL::NOT NULL$$
+GROUP BY $$toggle::type::SUM(type)::COUNT(type)$$
+ORDER BY $$toggle::type::SUM(type)::COUNT(type)$$ $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1
