@@ -14,7 +14,7 @@ V 0,0 == 18
 V 2,0 == 10
 V 4,0 == 7
 Parsons
-SELECT $$toggle::*::minLevel::SUM(minLevel)::COUNT(minLevel)::SUM(minLevel)::type$$
+SELECT $$toggle::*::minLevel::SUM(minLevel)::COUNT(minLevel)::type$$
 FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
 WHERE $$toggle::minLevel::itemName::MIN(minLevel)::MIN(itemName)$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::'axe'::NULL::NOT NULL$$
 GROUP BY $$toggle::type::SUM(type)::COUNT(type)::minLevel::SUM(minLevel)::COUNT(minLevel)$$

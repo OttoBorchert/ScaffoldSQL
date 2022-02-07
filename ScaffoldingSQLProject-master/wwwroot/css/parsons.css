@@ -4,12 +4,10 @@
     position: static;
     padding-left: 0px;
     margin-left: 2%;
-    float: left;
+    /*float: left;*/
 }
-#sortableTrash { width: 38%; }
-#sortable { width: 56%; }
 .sortable-code ul {
-    font-size: 120%;
+    font-size: 100%;
     font-family: monospace;
     list-style: none;
     background-color: #efefff;

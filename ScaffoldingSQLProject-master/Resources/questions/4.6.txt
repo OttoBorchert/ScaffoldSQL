@@ -15,6 +15,7 @@ Parsons
 SELECT $$toggle::*::MAX(coins)::COUNT(coins)::SUM(coins)::MIN(coins)::coins$$
 FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
 WHERE $$toggle::coins::SUM(coins)::MAX(coins)::playerID$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::30::NULL::NOT NULL$$
+EndParsons
 StartDatabase
 fantasy.db
 EndDatabase

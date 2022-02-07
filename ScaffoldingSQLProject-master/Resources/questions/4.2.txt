@@ -1,4 +1,4 @@
-Write an SQL query to determine how many guild leaders are in the game. Hint&amp;colon; You&amp;apos;ll need to use the Guilds table.
+Write an SQL query to determine how many guild leaders are in the game. Hint: You'll need to use the Guilds table.
 False
 True
 True
