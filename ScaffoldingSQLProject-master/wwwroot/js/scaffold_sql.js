@@ -77,11 +77,14 @@ function noerror() {
 // Run a command in the database
 function execute(commands, shallRunAsserts = true) {
     if (!db_loaded) {
-        console.log("Database is noit yet loaded. Aborting call.")
+        console.log("Database is not yet loaded. Aborting call.")
         return;
     }
     commands = DesanitizeHTMLParsons(commands);
     testCaseElm.innerHTML = ""
+
+    // If the text area for the free-form typing interface is not visible, then hint has been called
+    hintCalled = !($("#hint_area").is(":hidden"))
 
     if (typeof(firebase) !== 'undefined') {
         writeExecTime = new Date(firebase.firestore.Timestamp.now().seconds * 1000).toLocaleString('en-US', 'best-fit', 'short');
@@ -158,11 +161,6 @@ var checkIncorrectAnswer = function (result, parsonInterface) {
 
     // console.log("QuestionO is " + newQuestionO);
     const subString = "100%";
-
-    if (!questionData.TextAreaEnable) {
-        hintCalled = true;
-    }
-
 
     //if result does not contain '100%', increment attempts and print to console
     if (!result.includes(subString)) {
@@ -255,8 +253,8 @@ var write_Execute_Timestamp_To_FireBase = function (called, attempts, questionOu
 
     var string = "entry";
 
-    var ref = database.ref('parsons').child(string);
-    ref.push(parsonsData);
+    //var ref = database.ref('parsons').child(string);
+    //ref.push(parsonsData);
 }
 
 var write_Hint_And_Execute_Timestamps_To_FireBase = function (called, attempts, questionOutput, questionNumber, result) {
@@ -288,8 +286,8 @@ var write_Hint_And_Execute_Timestamps_To_FireBase = function (called, attempts, 
 
 
     var string = "entry";
-    var ref = database.ref('parsons').child(string);
-    ref.push(attemptsData);
+    //var ref = database.ref('parsons').child(string);
+    //ref.push(attemptsData);
 }
 
 //    //entryIncrement(attemptsData);

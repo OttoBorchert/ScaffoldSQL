@@ -8,12 +8,12 @@ EndSecrets
 StartParsonsSecrets
 MDE=PJ0JuhV53QqjDg890h8S8g==Fy14jo5bc70AvGCEMu4PLQ==8/0tm7dYnZgeORsfMclF4Imzy9eXMc3/NfR89uy8e0zZFSo0m6j0VIh6xo1qZyXe
 EndParsonsSecrets
-L R 14
+L R 15
 L C 1
 C 0 == playerLevel
 V 0,0 == 1
 V 6,0 == 8
-V 13,0 == 21
+V 13,0 == 19
 Parsons
 SELECT $$toggle::*::playerLevel::DISTINCT playerLevel::COUNT(playerLevel)::SUM(playerLevel)$$
 FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
