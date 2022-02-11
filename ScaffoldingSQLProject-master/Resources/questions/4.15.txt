@@ -1,0 +1,30 @@
+Create an SQL query that aggregates all of the players in a guild together. Only include guilds where the total amount of coins held by players in the guild is over 1400. Only include players who are actually in a guild. Display the guildID and the sum of the coins held by players in that guild in that order.
+False
+True
+True
+StartSecrets
+MDE=8KeVM6eSq/Y12TH5MZugWA==xcZr+ZbCGvXU/uolKqIZ2w==wfpzvJNB9SsmYlvi82ZlAesXx1gSY9TAfWpZBp+oaZknTH1LYErvp5z1t1Rcsnnf
+EndSecrets
+StartParsonsSecrets
+MDE=7MG4Gu3sitXGX7wqncUhdg==nftwu0Dl3WgmWRRqk6Yhkw==3E350pm/TKu196ejrntN+zeaZsWbtf4DUJv+9CZ+8/u4FcgA+TEVMmuRwHaSResq
+EndParsonsSecrets
+L R 3
+L C 2
+C 0 == guildID
+V 0,0 == 10
+V 0,1 == 1687
+V 1,0 == 20
+V 1,1 == 3094
+V 2,0 == 30
+V 2,1 == 1840
+Parsons
+SELECT $$toggle::*::playerID::guildID::COUNT(coins)::SUM(coins)::COUNT(*)::SUM(*)$$, $$toggle::*::playerID::guildID::COUNT(coins)::SUM(coins)::COUNT(*)::SUM(*)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::SUM(*)::SUM(coins)::COUNT(*)::COUNT(coins)::coins::guildID::20::30::1400::NULL::NOT NULL$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::SUM(*)::SUM(coins)::COUNT(*)::COUNT(coins)::coins::guildID::20::30::1400::NULL::NOT NULL$$
+GROUP BY $$toggle::SUM(*)::SUM(coins)::guildID::coins::playerLevel$$
+HAVING $$toggle::SUM(*)::SUM(coins)::COUNT(*)::COUNT(coins)::coins::guildID::20::30::1400::NULL::NOT NULL$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::SUM(*)::SUM(coins)::COUNT(*)::COUNT(coins)::coins::guildID::20::30::1400::NULL::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

@@ -1,0 +1,19 @@
+Write an SQL query to display the number of item names that start with the word Steel. You could just perform a normal SELECT and count the number of rows manually but challenge yourself a little by trying to using the aggregate operators we learned last episode.
+True
+True
+True
+StartSecrets
+MDE=CUK00XlUD6pkCi5fKFRzng==kBkoiS6lScgTqnEvs4ELeg==H/niBKdMM78QIb2wMWpK8Dg1CeUwfUkjp3VmROdp1V0lXyhS+DIDPzCYhBt1txrK
+EndSecrets
+StartParsonsSecrets
+MDE=QoF0K7NCCpqGBsRuo0loPA==uo2hI0gzAhUi+s7DsPEHGg==ihUAREgBdVYx0kU0+f7okohXoZGAxkYgb1uxZiOs57OYSzmFgtRT0K77oh+kjbYF
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == 3
+Parsons
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1
