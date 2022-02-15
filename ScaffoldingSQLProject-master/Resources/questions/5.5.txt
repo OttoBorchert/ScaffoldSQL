@@ -1,0 +1,23 @@
+Write a query to list all of the Items that are either of type sword or of type axe. Include all of the fields in the query.
+True
+True
+True
+StartSecrets
+MDE=5qg9uRLtwSIR6788yK1dqw==S8ufu6Rt9YBCR2lAaYBwsg==/0oWJMn80+p5eS1Rx6b9fV4cUn6nT+ycPUEEvc/URFWN7xotfP1u8oVRhp0slEQm
+EndSecrets
+StartParsonsSecrets
+MDE=kQwAhk0TrNW6CgqckKbieg==vUc1JGhRuxF/2E6dE3kIxQ==RdLmdSK1FxdNnVp6Vrf8YETRCe3Mt5fPtcnQp9QIGQcULQ9PEK9zNlwsZ6bl5yDR
+EndParsonsSecrets
+L R 4
+L C 5
+V 0,0 == 100
+V 3,0 == 900
+Parsons
+SELECT $$toggle::*::type::itemName::COUNT(*)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::itemID::itemName::minLevel::type::handedness$$ $$toggle::LIKE::>::>=::<::<=::=::<>::IS$$ $$toggle::'axe'::'sword'::'bow'::'dagger'::NULL::NOT NULL$$ $$toggle::AND::OR::NOT$$ $$toggle::itemID::itemName::minLevel::type::handedness$$ $$toggle::LIKE::>::>=::<::<=::=::<>::IS$$ $$toggle::'axe'::'sword'::'bow'::'dagger'::NULL::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

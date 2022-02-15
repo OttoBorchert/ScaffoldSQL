@@ -1,0 +1,27 @@
+Write an SQL query to display the number of coins held by players in the Grey Mountaineers guild. Again, you should be able to use a subquery, rather than specifying the guild ID via a manual step. If you aren't sure how, try using the Hint interface.
+True
+True
+True
+StartSecrets
+MDE=RZALKJb5/ZFbCe1l0BLD4A==GI9xTCfMzXvJMfhZ05+7YQ==oHQ2sfLpvsdN/IecygAufM6rV3/iChPSCID0UKF+Mv/Uanh9wKUJlNKg8DDh6Z+h
+EndSecrets
+StartParsonsSecrets
+MDE=6hIHzawn08q66zeyUWPs5w==DF4rCrUPK4KGuCfmY/+cqQ==7rANPYRBA1OuVmpsIvH0EJzXZItncXONlGXVNdoXPn4Knl4+oE06XDftyyBW6Lhl
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == 336
+Parsons
+SELECT $$toggle::coins::SUM(coins)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::playerID::guildID$$ = 
+(
+  SELECT $$toggle::guildID::playerID$$
+  FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+  WHERE guildName = "Grey Mountaineers"
+)
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

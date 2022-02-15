@@ -1,4 +1,4 @@
-Write an SQL query to display the number of item names that start with the word Steel. You could just perform a normal SELECT and count the number of rows manually but challenge yourself a little by trying to using the aggregate operators we learned last episode.
+Write an SQL query to display the number of item names that start with the word Steel. Hint: Use an aggregate operator we learned last episode.
 True
 True
 True
@@ -12,6 +12,9 @@ L R 1
 L C 1
 V 0,0 == 3
 Parsons
+SELECT $$toggle::*::COUNT(*)::COUNT(itemName)::COUNT(type)::type::SUM(*)::SUM(itemName)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::type::itemName::COUNT(itemName)::COUNT(type)::SUM(itemName)$$ $$toggle::LIKE::>::>=::<::<=::=::<>::IS$$ $$toggle::'Steel_'::'_Steel'::'%Steel'::'Steel%'::NULL::NOT NULL$$
 EndParsons
 StartDatabase
 fantasy.db

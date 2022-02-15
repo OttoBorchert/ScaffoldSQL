@@ -1,4 +1,4 @@
-Write an SQL query to list all of the player IDs of players who are leading a guild. Make sure the list is ordered from smallest player ID to largest playerID.
+Write an SQL query to list all of the player IDs of players who are leading a guild. Make sure the list is ordered from smallest player ID to largest player ID.
 True
 True
 True
@@ -9,11 +9,14 @@ StartParsonsSecrets
 MDE=XWmroYEmGYLDkxVJ0MGNtw==O9NGqTiPs1Pt6FQMwUGKSg==vH9EJEUu5+KBFFlT2klGI2KrZpMHOoI6Qp+lu/79q76uLNHB1B8AP4K3oVYKyL45
 EndParsonsSecrets
 L R 6
-L C 0
+L C 1
 V 0,0 == 1
-V 0,2 == 9
-V 0,5 == 17
+V 2,0 == 9
+V 5,0 == 17
 Parsons
+SELECT $$toggle::*::COUNT(leader)::playerID::guildID::leader$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::playerID::playerName::leader::guildID::COUNT(leader)$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::guildID::20::30::NULL::NOT NULL$$
 EndParsons
 StartDatabase
 fantasy.db

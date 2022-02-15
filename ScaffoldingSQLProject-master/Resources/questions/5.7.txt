@@ -1,0 +1,27 @@
+Write an SQL query to display the name of the player who leads the Shimmering Light guild. You should now be able to use a subquery, rather than specifying the guild ID via a manual step. If you aren't sure how, try using the Hint interface.
+True
+True
+True
+StartSecrets
+MDE=OXqwb/CD1lTyDwOJY2RZLA==ZWJpAI7Qxy9Zwvc/0oliUQ==NJiXBrpNxHr1b6C35HRwoIXQwAQaTu3F4yB6/86g7S2dZzv1Kl66ZL78vyrx2mrl
+EndSecrets
+StartParsonsSecrets
+MDE=wXLm3TzFprllVi4bwNkxbA==T833VuWKFOrl7KtwMUXbFQ==Q5MfdCb2XLTokTtYGZOVY2UehFutN1wy6bpbKihqJpQ4yQGOpYU8coQLu2bMgQst
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == Mintee
+Parsons
+SELECT playerName
+FROM Players
+WHERE playerID = 
+(
+  SELECT leader
+  FROM Guilds
+  WHERE guildName = "Shimmering Light"
+)
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

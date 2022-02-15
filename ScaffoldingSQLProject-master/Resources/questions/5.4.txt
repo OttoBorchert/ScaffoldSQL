@@ -1,0 +1,23 @@
+A game administrator is running a strange competition to find any five letter player names with a lowercase y as the third letter. Write this query for them. Display all fields for the players that match. Don&apos;t do any sorting.
+True
+True
+True
+StartSecrets
+MDE=oDtPbhEsz9i7PlI7pVdxWw==CzUXpR/mljF7ARJnrLZbTw==t2pjSCkV8tZ4vs8hSscGJUTU5C5kvbIPMz8vSLdFJEuKLj1r1+UV/CmxQNdufA/G
+EndSecrets
+StartParsonsSecrets
+MDE=JLY2gOKsIh0M3KS7AomjCg==JLb9ipTZThZ0SqnJe+9JVw==JBZ7rnP2XQLgFjZDKudO60OHq4F1FyYMlTS9x4SpMoWxQMNgayOUXssNK9a/N51X
+EndParsonsSecrets
+L R 2
+L C 5
+V 0,1 == Elyse
+V 1,0 == 2
+Parsons
+SELECT $$toggle::*::playerName::COUNT(playerName)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::playerID::playerName::guildID::coins$$ $$toggle::LIKE::>::>=::<::<=::=::<>::IS$$ $$toggle::'%%y%%'::'__y__'::'%y%'::'__y'::NULL::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1
