@@ -1,8 +1,13 @@
-Write an SQL query with a cross join to list the items that are in Shimmering Light's guild treasury. You'll need to merge the Guilds and Guild Treasury tables together. Display all of the combined table's information. Make sure you list Guilds first in the FROM clause.
+Write an SQL query with a cross join to list the items that are in Shimmering Light&apos;s guild treasury. You&apos;ll need to merge the Guilds and Guild Treasury tables together. Display all of the combined table&apos;s information. Make sure you list Guilds first in the FROM clause.
 True
 True
-U2FsdGVkX1/JM5noBmBhquIre2sosCqnk7qpvTiXwpg=
-U2FsdGVkX1/yMxh63NCsUd9+W47Ab2bw3faqmL5LEPM=
+True
+StartSecrets
+MDE=SlpGZjGfKqcGPipwkWE0SA==OqlRXR+oGUAHCdpqC3foDg==aVMU8ufBK/56kYUvMJk3rZQmZLojGWel0ed/tKbdBFWnaiWg7QvZYd0vOEi31coW
+EndSecrets
+StartParsonsSecrets
+MDE=OEdQ9F4rSRpC92YN/fZmbw==FhWWQIWT9VrfynCppfma1w==v+HLZ+uIQxOFvQ+aoM5kXVQ1DQ5L0heALG11QkSX3v8nt+vRjp5H1hppQw+iLfif
+EndParsonsSecrets
 L R 4
 L C 8
 C 0 == guildID
@@ -15,5 +20,12 @@ V 2,0 == 30
 V 2,1 == Shimmering Light
 V 2,6 == 400
 Parsons
-SELECT $$toggle::*::playerId::minLevel$$, $$toggle::*::playerId::type$$
-FROM $$toggle::Players::Guilds::Items$$
+SELECT $$toggle::*::MAX(coins)::COUNT(coins)::SUM(coins)::MIN(coins)::coins$$
+FROM Guilds, $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::Guilds.guildID::GuildTreasury.guildID::Guilds.guildLevel::GuildTreasury.itemID::GuildTreasury.quantity$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::GuildTreasury.guildID::Guilds.guildLevel::GuildTreasury.itemID::GuildTreasury.quantity::NOT NULL$$
+   AND $$toggle::Guilds.guildID::GuildTreasury.guildID::Guilds.guildName::GuildTreasury.itemID::GuildTreasury.quantity$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::'Shimmering Light'::'Shocking Power'::Guilds.guildLevel::GuildTreasury.itemID::GuildTreasury.quantity::NOT NULL$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1
