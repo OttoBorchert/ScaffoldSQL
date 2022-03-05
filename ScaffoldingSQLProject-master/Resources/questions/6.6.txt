@@ -20,7 +20,7 @@ FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$, $$tog
 WHERE $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader::NOT NULL$$
    AND $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader::NOT NULL$$
    AND Items.itemName = 'Iron Sword'
-ORDER BY Guilds.guildName $$toggle::ASC::DESC$$;
+ORDER BY Guilds.guildName $$toggle::ASC::DESC$$
 EndParsons
 StartDatabase
 fantasy.db
