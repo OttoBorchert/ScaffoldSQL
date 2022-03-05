@@ -1,0 +1,29 @@
+Write an SQL query using a natural join that displays all of the players and the guild they belong to. Only display the player name and the guild name, in that order. Sort the list alphabetically by guild name, then by player name. (Notice that this does not include the players that are not in a guild! We&apos;ll work on this problem in the next episode)
+True
+True
+True
+StartSecrets
+MDE=wTXFNrniPtw9xev6hf+upA==1R9ibDckTwlNtpMcIQoC2Q==RF30WJz0mnQsBZ++SFOAdJsO4g1NxsVv+Xe78iGHyEJILJ5UI9JZ5V8y2vLX4lRv
+EndSecrets
+StartParsonsSecrets
+MDE=2g/0lBOvKEU/SagD89wZgA==lH0zT0dzo0JJ14hfGFHX4g==Cy6QYL07im/oRtGKsSpjXLs/dXEk4VDucC7SSv4GL1Y39QYEzJIqto2jm5QYuEbw
+EndParsonsSecrets
+L R 16
+L C 2
+C 0 == playerName
+C 1 == guildName
+V 0,0 == Xylo
+V 0,1 == Bitter Power Pals
+V 4,0 == Rydomin
+V 4,1 == Grey Mountaineers
+V 8,0 == Mintee
+V 8,1 == Shimmering Light
+Parsons
+SELECT $$toggle::*::itemName::playerName::guildName$$, $$toggle::*::itemName::playerName::guildName$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ NATURAL JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+ORDER BY $$toggle::playerName::itemName::guildName::quantity$$ $$toggle::ASC::DESC$$, $$toggle::playerName::itemName::guildName::quantity$$ $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

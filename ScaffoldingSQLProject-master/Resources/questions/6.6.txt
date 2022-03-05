@@ -1,13 +1,28 @@
-Write an SQL query with an inner join to display the guild name and all the coins held by players of that guild. Order the query so the guild with the most coins comes first. (Hint: You'll need to use a join and an aggregate/GROUP BY here). As before, make sure you list the columns as specified.
+Write an SQL query with a cross join that lists only the names of the guilds that have an Iron Sword in their Guild Treasury. Sort the list alphabetically by guild name.
 True
 True
-U2FsdGVkX18xaC5r+swn8KZa8Ux3z+sIPGmFrZjAQgg=
-U2FsdGVkX1+35bgn83KXWxoxB9hbRsSjR7uNUoSLo08=
-L R 7
-L C 2
-V 0,0 == Shocking Power
-V 0,1 == 3094
-V 3,0 == Grey Mountaineers
-V 3,1 == 336
-V 6,0 == Bitter Power Pals
-V 6,1 == 2
+True
+StartSecrets
+MDE=7P48kzVvzyOK7058fJUKIA==le/M5VReAkVKDrPhUWj34g==ApJJWsuqKysgQTmG7SwBhBmJi/qBhdAgm9PexsFyucbDdvumgBe/EqGnzS87B77F
+EndSecrets
+StartParsonsSecrets
+MDE=dDozaqgFmhpGoKEJcAnE2w==S+qJSpfYoWuYsNG5Rb708w==Tdv72MmdE2l4cERoCUZQuFLgzbDlo6k+oMY+II7804zy8evSH0T6+4A1s8QMxjgR
+EndParsonsSecrets
+L R 4
+L C 1
+V 0,0 == Grey Mountaineers
+V 1,0 == Grey Warriors
+V 2,0 == Shimmering Light
+V 3,0 == Shocking Power
+Parsons
+SELECT $$toggle::*::Players.leader::Guilds.leader::Players.playerID::Guilds.guildID::Guilds.guildName$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$, $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$, $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader::NOT NULL$$
+   AND $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader::NOT NULL$$
+   AND Items.itemName = 'Iron Sword'
+ORDER BY Guilds.guildName $$toggle::ASC::DESC$$;
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

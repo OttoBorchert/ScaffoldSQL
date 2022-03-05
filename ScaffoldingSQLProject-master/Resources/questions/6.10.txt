@@ -1,0 +1,22 @@
+Write an SQL query with a natural join that shows the number of coins held by players in the Shimmering Light guild. You&apos;ll need to use an aggregate operator.
+True
+True
+True
+StartSecrets
+MDE=gzIqfs8Ixw9pmZ9YxMy6bg==gXKvGu9x3pZTp0NI6mMgjw==4T+pT2RKlq0YPV8A2+zvZBgvCEFdGIem3z2aejoCr/CqOXEj0bfRik2J39ona7Nu
+EndSecrets
+StartParsonsSecrets
+MDE=e3m9v5NfVOC4hxeacAvCWQ==jkAYmjt0kqXGxrcVAwzVmg==NnP8HSSDH5h2AB0wFHQgG6MXTACLYRXCQiNFUTgDMRykP30r/zJkv4wyOgJXt+77
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == 1840
+Parsons
+SELECT $$toggle::*::coins::SUM(coins)::COUNT(coins)::COUNT(*)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ NATURAL JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE $$toggle::playerName::guildName::playerID::guildID$$ = 'Shimmering Light'
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

@@ -1,0 +1,26 @@
+Write an SQL query using a natural join that lists the quantity of each item in the guild treasury. Hint: This will require an aggregate. Only display the name of the item and the total quantity of items in all guild treasuries, in that order. Sort the list so that the highest quantities are listed first. Break any ties in the sorting using reverse alphabetical order on the name of the item.
+True
+True
+True
+StartSecrets
+MDE=P1HLlsMrgg6VpMzW2vk3Jw==7Ngg2PPrNoKsSPWf6lBeLQ==DZjOXOCL4KKnj9rvxzw3FFmeZtjZ8DOz+HyV3G7I00bHO4S4Gfdh3NJuF76YkCgP
+EndSecrets
+StartParsonsSecrets
+MDE=lfWZ527YGqPS/lKTEV15FQ==w/PRpJsLEwbUvAAvoQ2xYw==SmhYHuXHej7DlzVi79lonl5cW67AwaAzBTLC6BhwnyO3KLpq1xOzU29U1lPi7WDj
+EndParsonsSecrets
+L R 8
+L C 2
+V 2,0 == Bronze Axe
+V 2,1 == 19
+V 7,0 == Iron Staff
+V 7,1 == 3
+Parsons
+SELECT itemName, $$toggle::*::quantity::SUM(quantity)::COUNT(quantity)::COUNT(*)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ NATURAL JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+GROUP BY $$toggle::Items.itemID::GuildTreasury.itemID::GuildTreasury.itemID::GuildTreasury.quantity$$
+ORDER BY $$toggle::COUNT(quantity)::COUNT(*)::SUM(quantity)::quantity$$ $$toggle::ASC::DESC$$, $$toggle::playerName::itemName::quantity$$ $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

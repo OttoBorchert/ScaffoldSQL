@@ -1,11 +1,23 @@
-Write a query using a natural join that lists the quantity of each item in the guild treasury.(Hint: This will require an aggregate). Only display the name of the item and the total quantity of items in allguild treasuries, in that order. Sort the list so that the highest quantities are listed first. Break any ties in the sorting using reverse alphabetical order on the name of the item.
+Write an SQL query with an inner join to determine the total number of items that are in the Winds of Grey treasury (Hint&colon; There is a quantity field in GuildTreasury) Do not hardcode the foreign keys.
 True
 True
-U2FsdGVkX19anPw8rffgCFwZmGqcVXWIihO2JyoZU0E=
-U2FsdGVkX18jEN+oqHXyTZu++tYB19hlOx+rbkKiG84=
-L R 8
-L C 2
-V 2,0 == Bronze Axe
-V 2,1 == 19
-V 7,0 == Iron Staff
-V 7,1 == 3
+True
+StartSecrets
+MDE=6w5bZXGQjSYh3WiyHayS/Q==gQRqig7CD5dOqSt7uskGUQ==wXrGnXl4HY6xgmobH2Ju9wz04KQqX4OBIyl9PVH0za6CwADSCBsaKMf7KeAGuTYv
+EndSecrets
+StartParsonsSecrets
+MDE=+BcYC9EAGr09vX3tbs66nA==vSiXhIdyLnsOtHBe+H3gUA==TplKL/crRWAHFKZdQTLZ2vgzBQridVZvl+6j0hcTTW6Uk0nAgQadeFbBYiWZZblV
+EndParsonsSecrets
+L R 1
+L C 1
+V 0,0 == 6
+Parsons
+SELECT $$toggle::*::quantity::SUM(quantity)::COUNT(quantity)::COUNT(*)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+   ON $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::Items.itemID::Guilds.leader::NOT NULL$$
+WHERE guildName = 'Winds of Grey';
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

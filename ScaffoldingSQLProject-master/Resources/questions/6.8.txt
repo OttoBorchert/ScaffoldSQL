@@ -1,15 +1,35 @@
-Write a query using a natural join that displays all of the players and the guild they belong to. Only display the player name and the guild name, in that order. Sort the list alphabetically by guild name, then by player name. (You'll notice that this does not include the players that are not in a guild! We'll work on this problem in the next episode)
+Write an SQL query with an inner join to display the player name, player level, and guild name of all of the players with level greater than 8. Order the list so the player with the highest level is first. Make sure you order the columns as specified as well.
 True
 True
-U2FsdGVkX190LDv+ZdCZczfVbQIlXO/C55GdKTFzHB8=
-U2FsdGVkX19e7g6eW/RIwXcCLBMjp/SX/qulgE8nlEc=
-L R 16
-L C 2
+True
+StartSecrets
+MDE=WwbV7rv/U9eWx6oVyjkHSQ==FW58tjp00Qd+LbbB9Rg7pw==/n1XIYupfKe1w59xKh9eFuM7kGGVvWpYd80toGlqNsPwvMwvNYvpE9wkfOrObd3+
+EndSecrets
+StartParsonsSecrets
+MDE=paISut7tJflAKXZpdes6Wg==XIdQspm3JZaxmdBFubWjzA==p3JYfBDqTxOkaocMrSaNtaj7ixsi8PTLhB2A4l1zycpTXk0qKNitczk/lCM76LW4
+EndParsonsSecrets
+L R 6
+L C 3
 C 0 == playerName
-C 1 == guildName
-V 0,0 == Xylo
-V 0,1 == Bitter Power Pals
-V 4,0 == Rydomin
-V 4,1 == Grey Mountaineers
-V 8,0 == Mintee
-V 8,1 == Shimmering Light
+C 1 == playerLevel
+C 2 == guildName
+V 0,0 == Elyse
+V 0,1 == 21
+V 0,2 == Grey Warriors
+V 3,0 == Wraithse
+V 3,1 == 12
+V 3,2 == Shimmering Light
+V 5,0 == Vera
+V 5,1 == 9
+V 5,2 == Winds of Grey
+Parsons
+SELECT $$toggle::*::playerName, playerLevel, guildName$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+   ON $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName::NOT NULL$$
+WHERE $$toggle::playerLevel::guildLevel::playerID::guildID$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::7::8::9::NOT NULL::NULL$$
+ORDER BY playerLevel $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

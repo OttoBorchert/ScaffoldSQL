@@ -1,0 +1,29 @@
+Write an SQL query with an inner join to display the guild name and all the coins held by players of that guild. Order the query so the guild with the most coins comes first. (Hint&colon; You&apos;ll need to use a join and an aggregate/GROUP BY here). As before, make sure you list the columns as specified.
+True
+True
+True
+StartSecrets
+MDE=r+NoLFuPphab+eltTZpM0A==cRG9AvYRtrgDfu/9xkxijw==gioq9KHAfSjiF1hbstn4Turar/zoZD2pkI8+dO41rNyfZhEZmt/7u7mXw8/hBRyR
+EndSecrets
+StartParsonsSecrets
+MDE=dlD9sXM0AJjiOadPaT5LgQ==Qm+TMcsY29u9w4edjqSThg==fzXdcqgIEbJrl886J4mSwysJYpif4ABXa7B+x/T+6pQchM/hd0/ZR+RcTnlRnJPO
+EndParsonsSecrets
+L R 7
+L C 2
+V 0,0 == Shocking Power
+V 0,1 == 3094
+V 3,0 == Winds of Grey
+V 3,1 == 831
+V 6,0 == Bitter Power Pals
+V 6,1 == 2
+Parsons
+SELECT guildName, $$toggle::COUNT(coins)::COUNT(*)::SUM(coins)::coins$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+   ON $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName::NOT NULL$$
+GROUP BY $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName$$
+ORDER BY $$toggle::COUNT(coins)::COUNT(*)::SUM(coins)::coins$$ $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1
