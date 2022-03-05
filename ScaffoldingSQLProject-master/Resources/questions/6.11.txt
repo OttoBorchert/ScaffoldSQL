@@ -17,7 +17,7 @@ V 7,1 == 3
 Parsons
 SELECT itemName, $$toggle::*::quantity::SUM(quantity)::COUNT(quantity)::COUNT(*)$$
 FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ NATURAL JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
-GROUP BY $$toggle::Items.itemID::GuildTreasury.itemID::GuildTreasury.itemID::GuildTreasury.quantity$$
+GROUP BY $$toggle::Items.itemID::GuildTreasury.itemID::GuildTreasury.quantity$$
 ORDER BY $$toggle::COUNT(quantity)::COUNT(*)::SUM(quantity)::quantity$$ $$toggle::ASC::DESC$$, $$toggle::playerName::itemName::quantity$$ $$toggle::ASC::DESC$$
 EndParsons
 StartDatabase
