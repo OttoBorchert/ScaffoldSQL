@@ -546,6 +546,10 @@ var testValueAssert = function (row, col, oper, expected, result_table) {
 
     try {
         let actual = result_table.values[row][col];
+        if (actual === null) { // Fun Javascript fact: null == 'null' is false
+            actual = "NULL";
+        }
+
         let res = operators[oper](actual, expected);
         if (res) {
             addPassMessage(`Pass: ${actual} ${oper} ${expected} in row ${row} column ${result_table.columns[col]}`);
