@@ -1,0 +1,29 @@
+Write an SQL query to list all of the items in the game and the total of all quantities of that item in all guild treasuries. Sort the list with the highest quantity of items first, then alphabetically by name. The final answer should only display the item name and total quantity. If the item is not in a treasury, it should display NULL for the quantity.
+True
+True
+True
+StartSecrets
+MDE=28On7dGaBUpiSp/XDNxDEQ==cQHTjYb8P/MSJCvGRFfQTg==Aim54NJw8Yfkmhmh+lRD9/d5wLC/ufga+NL1HHWA/1CY1KqEh3KZW5VcjnNQxXPd
+EndSecrets
+StartParsonsSecrets
+MDE=mY0b9v4yb14oe2ztPbU/sA==Uv+6UHaQ58eAOwUKHJSHbw==sgwg8n8bgcTSQzZvfnPJ+UScza8lUqECzzxaBDHOzpR9uCU3l5Qug31DD02vtvG6
+EndParsonsSecrets
+L R 9
+L C 2
+V 0,0 == Iron Sword
+V 3,0 == Steel Bow
+V 8,0 == Bronze Bow
+V 0,1 == 48
+V 3,1 == 17
+V 8,1 == NULL
+Parsons
+SELECT itemName, $$toggle::COUNT(quantity)::COUNT(*)::SUM(quantity)::quantity$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ $$toggle::RIGHT JOIN::LEFT JOIN::INNER JOIN::CROSS JOIN::NATURAL JOIN$$ $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+   ON $$toggle::Items.itemID::GuildTreasury.guildID::GuildTreasury.itemID::GuildTreasury.quantity$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Items.itemID::GuildTreasury.guildID::GuildTreasury.itemID::GuildTreasury.quantity::NOT NULL$$
+GROUP BY $$toggle::Items.itemID::GuildTreasury.guildID::GuildTreasury.itemID::GuildTreasury.quantity$$
+ORDER BY $$toggle::COUNT(quantity)::COUNT(*)::SUM(quantity)::quantity$$ $$toggle::ASC::DESC$$, itemName $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

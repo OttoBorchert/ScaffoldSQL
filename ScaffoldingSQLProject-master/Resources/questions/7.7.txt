@@ -1,0 +1,31 @@
+Write an SQL query to display a list of all of the names in the database - This includes the item names, guild names, and player names. They should all be in a single column.
+True
+True
+True
+StartSecrets
+MDE=RD9l7rHCuUeMEvc1yl8HYg==PV5fn3vF/5ODWP0w5ber1w==1+/Qh5Vs8y3JjLODLOpKCtR7XEmVuA/XZWUr3ynrm6CzKx5OhmDNEgDGrGPqaDNe
+EndSecrets
+StartParsonsSecrets
+MDE=DBipYzKwP9atu3P591OpwQ==WOsshlMQ4i0/DYhvRi1AKw==kTYONYt6Vyeykw8NaDTiP5aWtCtHdbJ9x7X/u08yX+K6l2FhEx/iiJ5mj+Al6kdl
+EndParsonsSecrets
+L R 36
+L C 1
+V 0,0 == Alyma
+V 10,0 == Elyse
+V 20,0 == Plucki
+V 30,0 == Sulin
+V 35,0 == Xylo
+Parsons
+SELECT $$toggle::guildName::itemName::playerName$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+UNION
+SELECT $$toggle::guildName::itemName::playerName$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+UNION
+SELECT $$toggle::guildName::itemName::playerName$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

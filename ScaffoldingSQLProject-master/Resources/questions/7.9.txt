@@ -1,0 +1,39 @@
+Create an SQL query to list all of the Items in the game. If the Items are held in a Guild Treasury, include that information as well, otherwise list NULL. The final table should include the item’s name, the guild’s name, and the quantity of that item held by the guild. Order the list alphabetically by item name, with any ties broken using the guild name.
+True
+True
+True
+StartSecrets
+MDE=TMhSI2rKKpTOdpvmyIgUqQ==PsKzkL7eIMXbCPUW+r2BbQ==7iM2gmOBIGVoP4eLPitf7xFty+g6nriFhu9aMqi+SrDt3qSzpmsauHd+GDQ0CceD
+EndSecrets
+StartParsonsSecrets
+MDE=cE2QPSnYgurLEegXH0OtQg==hnWLS164CqKEc4cDOnEO4g==BcfhVMlTIOCALZcA/bbMh1YpMnHiI8iWGUlX/Tl8ykWGkvXYk9mwlHMox1FetieH
+EndParsonsSecrets
+L R 25
+L C 3
+C 0 == itemName
+C 1 == guildName
+C 2 == quantity
+V 0,0 == Bronze Axe
+V 0,1 == Grey Mountaineers
+V 0,2 == 3
+V 10,0 == Iron Sword
+V 10,1 == Grey Mountaineers
+V 10,2 == 6
+V 20,0 == Steel Bow
+V 20,1 == Gray Wolf Clan
+V 20,2 == 4
+V 4,0 == Bronze Bow
+V 4,1 == NULL
+V 4,2 == NULL
+Parsons
+SELECT $$toggle::*::itemName, guildName, quantity$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ $$toggle::RIGHT JOIN::LEFT JOIN::INNER JOIN::CROSS JOIN::NATURAL JOIN$$ 
+   ($$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ $$toggle::RIGHT JOIN::LEFT JOIN::INNER JOIN::CROSS JOIN::NATURAL JOIN$$ $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+      ON $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::GuildTreasury.quantity$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::GuildTreasury.guildID::GuildTreasury.itemID::GuildTreasury.quantity::NOT NULL$$)
+   ON $$toggle::Items.itemID::GuildTreasury.guildID::GuildTreasury.itemID::GuildTreasury.quantity$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Items.itemID::GuildTreasury.guildID::GuildTreasury.itemID::GuildTreasury.quantity::NOT NULL$$
+ORDER BY itemName $$toggle::ASC::DESC$$, guildName $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1
