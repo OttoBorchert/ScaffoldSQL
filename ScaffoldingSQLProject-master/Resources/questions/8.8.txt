@@ -1,11 +1,24 @@
-Modify the query from 8.7, so that all guilds are included, even those without a leader. It should display No Leader when there isn't a leader for the guild. Hint: You'll need to replace one of the columns with coalesce. Hint #2: You also might need to change the kind of join you're using. The output should look exactly like the table right after this question.
+Write an SQL query to display the number of trades that Alyma sent between 8 and 9 PM on April 18, 2021. (Only include the trades Alyma sent, not that she received)
 True
 True
-U2FsdGVkX18QnUVh0PzInGhKZJRAPLql23rzkT7YQi8=
-U2FsdGVkX1+5nTZH3ibk2JgtUt3t33y9xdM83BYuFdo=
-L R 8
+True
+StartSecrets
+MDE=qML8mAB+jVB96Wrp8mE/7w==wmc8cBfr/2YtKEgjOmo0eg==UnKjNxVS4SeB4FXMbWH2NQwuWIscsOC96yNvgMLLCHfiCp0l/qCFSb4AckqZPPAk
+EndSecrets
+StartParsonsSecrets
+MDE=uvfhaS9ZP/HwvKKl6EL5IQ==Y7CrRYtqn16YD60SM8nOEQ==RX0/g/514qLRiNcv8XyuLQfV9rsLka0pIPDS9ImTTTE8mYi6GLV8SBCaIs4R7oGL
+EndParsonsSecrets
+L R 1
 L C 1
-C 0 == Guild Summary
-V 0,0 == Grey Warriors (20) Leader: Elyse
-V 4,0 == Vengeful Warriors (4) Leader: No Leader
-V 7,0 == Shimmering Light (1) Leader: Mintee
+V 0,0 == 1
+Parsons
+SELECT $$toggle::*::SUM(*)::COUNT(*)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ 
+   ON Players.playerID = $$toggle::Players.playerID::TradeTransactions.playerID::TradeTransactions.sendingPlayerID::TradeTransactions::receivingPlayerID$$ 
+WHERE playerName = 'Alyma'
+   $$toggle::AND::OR::NOT$$ transactionTime BETWEEN '2021-04-18 20:00:00' $$toggle::AND::OR::NOT$$ '2021-04-18 21:00:00';
+EndParsons
+StartDatabase
+fantasy-2022.db
+EndDatabase
+1

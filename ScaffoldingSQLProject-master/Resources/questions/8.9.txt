@@ -1,0 +1,28 @@
+Write an SQL query to determine the trades that occurred the past 30 days. Only include the name of the item and the date/time it was traded, in that order. Order the results so the most recent transaction is first. (Warning: The test cases for this question will stop functioning properly after April 18, 2022)
+True
+True
+True
+StartSecrets
+MDE=xEJm7fwYntmVgX4pg5eEDQ==1owI6+3p0kLqPSGEKzLOeg==cqi1c01cAtpwaZiXAUVu1AKDBebhMGV5JAvwBuqMK1i/dAT/8aA8xlgquxDfhz9r
+EndSecrets
+StartParsonsSecrets
+MDE=tiEEQyNmO0Va1sQfgmfRkA==amu3MJ8uas621+TPH3CwVA==N9Sxd8pEFKzfOGjh3VpP2CpBE/yUJZU00fYk7+cuUFlFjBcjVyugF+uHSW0O2eXd
+EndParsonsSecrets
+L R 10
+L C 2
+V 0,0 == Iron Sword
+V 0,1 == 2022-03-24 10:32:09
+V 4,0 == Steel Bow
+V 4,1 == 2022-03-22 01:18:48
+V 9,0 == Steel Bow
+V 9,1 == 2022-03-19 02:35:31
+Parsons
+SELECT $$toggle::*::itemName, transactionTime$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ NATURAL JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ 
+WHERE julianday($$toggle::transactionTime::DATE('now')$$) $$toggle::+::-::*::/$$ julianday($$toggle::transactionTime::DATE('now')$$) <= 30
+ORDER BY transactionTime $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy-2022.db
+EndDatabase
+1

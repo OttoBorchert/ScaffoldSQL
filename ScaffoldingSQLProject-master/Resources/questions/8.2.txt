@@ -1,9 +1,22 @@
-Create an SQL query to list all of the data and fields in the TradeTransactions table, but sort the table so that the most recent transactions are first.
+Create an SQL query to list all of the data and fields in the TradeTransactions table.
 True
 True
-U2FsdGVkX19tYWogzb65YzG4R6dESm97FEtrUabhOIg=
-U2FsdGVkX18vxR2i0JuPpq4sHqHArfAWi6qy8ftwWko=
+True
+StartSecrets
+MDE=TDTw8wldfkTpS2wijJKesw==QP88XwMjxv8s+p5bv9y6+Q==qcsv0SxBfi2zOxvR36ISuVRpPvMphw3nDc1mrKAop3KsO+iwk3VsBQK/2uuWcRR+
+EndSecrets
+StartParsonsSecrets
+MDE=/2p+7lqdr5barqIcYANqcg==eofSksxzgD5BfC0IRuS4Ig==SCVrpHOFdPdcfuwdMTbh1YnE8ypTRntVRsmChtWb9HWc99iVXwEVXRbMZyuWtR5o
+EndParsonsSecrets
 L R 30
 L C 5
 C 0 == transactionID
-V 0,0 == 30
+V 0,0 == 1
+Parsons
+SELECT $$toggle::*::transactionID::sendingPlayerID::receivingPlayerID::transactionTime::itemID$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+EndParsons
+StartDatabase
+fantasy-2022.db
+EndDatabase
+1
