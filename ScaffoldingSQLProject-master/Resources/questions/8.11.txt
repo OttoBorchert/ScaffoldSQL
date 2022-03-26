@@ -15,7 +15,8 @@ V 0,0 == Grey Warriors (20) Leader: Elyse
 V 4,0 == Gray Wolf Clan (2) Leader: Plucki
 V 5,0 == Shimmering Light (1) Leader: Mintee
 Parsons
-SELECT guildName $$toggle::+::.::||$$ ' (' $$toggle::+::.::||$$ guildLevel $$toggle::+::.::||$$ ') Leader: ' $$toggle::+::.::||$$ playerName
+SELECT guildName $$toggle::+::.::||$$ ' (' $$toggle::+::.::||$$ guildLevel $$toggle::+::.::||$$
+') Leader: ' $$toggle::+::.::||$$ playerName
   AS 'Guild Summary'
 FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
    ON $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName::NOT NULL$$

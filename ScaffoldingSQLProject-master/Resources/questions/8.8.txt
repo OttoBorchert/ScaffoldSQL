@@ -16,7 +16,8 @@ SELECT $$toggle::*::SUM(*)::COUNT(*)$$
 FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ 
    ON Players.playerID = $$toggle::Players.playerID::TradeTransactions.playerID::TradeTransactions.sendingPlayerID::TradeTransactions::receivingPlayerID$$ 
 WHERE playerName = 'Alyma'
-   $$toggle::AND::OR::NOT$$ transactionTime BETWEEN '2021-04-18 20:00:00' $$toggle::AND::OR::NOT$$ '2021-04-18 21:00:00';
+   $$toggle::AND::OR::NOT$$ transactionTime 
+   BETWEEN '2021-04-18 20:00:00' $$toggle::AND::OR::NOT$$ '2021-04-18 21:00:00'
 EndParsons
 StartDatabase
 fantasy-2022.db

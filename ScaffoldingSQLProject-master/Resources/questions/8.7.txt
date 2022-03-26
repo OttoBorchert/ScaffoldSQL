@@ -19,14 +19,14 @@ V 15,2 == Aventop
 V 16,1 == Alyma
 V 16,2 == Blothie
 Parsons
-SELECT itemName, SendingPlayer.playerName, ReceivingPlayer.playerName, transactionTime
-FROM Players as SendingPlayer JOIN TradeTransactions
-  ON SendingPlayer.playerID = sendingPlayerID
-JOIN Players as ReceivingPlayer 
-  ON ReceivingPlayer.playerID = receivingPlayerID
+SELECT itemName, SPlayer.playerName, RPlayer.playerName, transactionTime
+FROM Players as SPlayer JOIN TradeTransactions
+  ON SPlayer.playerID = sendingPlayerID
+JOIN Players as RPlayer 
+  ON RPlayer.playerID = receivingPlayerID
 JOIN Items
   ON Items.itemID = TradeTransactions.itemID
-ORDER BY itemName, SendingPlayer.playerName, ReceivingPlayer.playerName
+ORDER BY itemName, SPlayer.playerName, RPlayer.playerName
 EndParsons
 StartDatabase
 fantasy-2022.db
