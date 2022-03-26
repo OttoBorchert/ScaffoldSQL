@@ -1,11 +1,34 @@
-Write an SQL query to create a guild summary that includes the guild name, guild leader’s name, and guild level. Make sure the guilds are ordered from highest level to lowest level. It should match the table after this question **exactly**. Make sure the column is called Guild Summary. Answer the question in the SQL Interpreter above, then enter the code word here:
+Create an SQL query using multiple joins to display information about the TradeTransactions. The result should include the name of the item, the name of the sending player, the name of the receiving player,  and the time of the transaction, in that order. It should be sorted alphabetically by the item name, then by the sending player&apos;s name, then by the receiving player&apos;s name. Note&colon; This is one of the more complicated queries you&apos;ve attempted so far. You&apos;ll need to join the Players table twice, once for the sending player and once for the receiving player - make sure you use aliases (the AS operator) for the table names to make everything work.
 True
 True
-U2FsdGVkX1/06ZkaknONbxqzda0p5P9lDnDtv01nmiY=
-U2FsdGVkX18uN+iRji36ZNdoDlM53pDZfVuYkMnkmQg=
-L R 6
-L C 1
-C 0 == Guild Summary
-V 0,0 == Grey Warriors (20) Leader: Elyse
-V 4,0 == Gray Wolf Clan (2) Leader: Plucki
-V 5,0 == Shimmering Light (1) Leader: Mintee
+True
+StartSecrets
+MDE=PeR3E/pV9+u3mAwwDx3xfA==3URFZscBITHAuvwVKdsA9g==jnbVz36F/BYAigZENpqaJecCOmcnodCaFOLtlhB6oZ9a/bYEGx+Jd942l+Ong7nW
+EndSecrets
+StartParsonsSecrets
+MDE=Suq/yMul+p+1hrY7pFHULg==x3HnR9AxI4VDbQDj16snSw==pbJ2A9pyWhon9g7qoJpKr5yJxhrPna274A0oo9dWuDPHXRbDeIYBxksuMTCx5dUr
+EndParsonsSecrets
+L R 30
+L C 4
+V 0,0 == Bronze Axe
+V 0,1 == Rydomin
+V 0,2 == Elyse
+V 0,3 == 2022-02-02 12:23:11
+V 15,1 == Alyma
+V 15,2 == Aventop
+V 16,1 == Alyma
+V 16,2 == Blothie
+Parsons
+SELECT itemName, SendingPlayer.playerName, ReceivingPlayer.playerName, transactionTime
+FROM Players as SendingPlayer JOIN TradeTransactions
+  ON SendingPlayer.playerID = sendingPlayerID
+JOIN Players as ReceivingPlayer 
+  ON ReceivingPlayer.playerID = receivingPlayerID
+JOIN Items
+  ON Items.itemID = TradeTransactions.itemID
+ORDER BY itemName, SendingPlayer.playerName, ReceivingPlayer.playerName
+EndParsons
+StartDatabase
+fantasy-2022.db
+EndDatabase
+1

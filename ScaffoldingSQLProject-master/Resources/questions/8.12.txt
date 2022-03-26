@@ -1,0 +1,28 @@
+(The first part of this question is the same as the previous one) Write an SQL query to create a guild summary that includes the guild name, guild leader’s name, and guild level. Make sure the guilds are ordered from highest level to lowest level. It should match the table after this question exactly. Make sure the column is called Guild Summary. (This next part is new). Make sure all guilds are included, even those without a leader. It should display No Leader when there isn&apos;t a leader for the guild. Hint&colon; You&apos;ll need to replace one of the columns with coalesce. Hint #2&colon; You also might need to change the kind of join you&apos;re using. The output should look exactly like the table right after this question.
+True
+True
+True
+StartSecrets
+MDE=5lzTB5OHUpmRnlemgBYaPQ==muqxbhfT1SjQ/83+qvGVlg==rN/DQ/kc1UqSfnXqe/bT5HROQk/SGYgWZ6Fm53wE6vMse84CcU+cfp0d+oSsF9vi
+EndSecrets
+StartParsonsSecrets
+MDE=1QC8sOis7CtvSYP6fVZdeg==cjE8ndZsQcU9P8PKFrhEeA==T7vR6OCpT/m4Zky20eu7996DTpSwLmaxLAwDZ+MYNqwLtrgsogkP1ODbzBRbpiEu
+EndParsonsSecrets
+L R 8
+L C 1
+C 0 == Guild Summary
+V 0,0 == Grey Warriors (20) Leader: Elyse
+V 4,0 == Vengeful Warriors (4) Leader: No Leader
+V 7,0 == Shimmering Light (1) Leader: Mintee
+Parsons
+SELECT guildName || ' (' || guildLevel || ') Leader: ' ||
+  $$toggle::playerName::COALESCE(playerName, "No Leader")::COALESCE("No Leader")::COALESCE("No Leader", playerName)$$
+  AS 'Guild Summary'
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ $$toggle::JOIN::INNER JOIN::CROSS JOIN::LEFT JOIN::NATURAL JOIN$$ $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+   ON Players.playerID = Guilds.leader
+ORDER BY guildLevel $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

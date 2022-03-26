@@ -1,0 +1,27 @@
+Write an SQL query to create a guild summary that includes the guild name, guild leader's name, and guild level. Make sure the guilds are ordered from highest level to lowest level. It should match the table after this question **exactly**. Make sure the column is called Guild Summary.
+True
+True
+True
+StartSecrets
+MDE=L5PxwwTjA4Fxd+PdLslRDg==wlZeYpQ4KIb6rF/FlKeY1A==o7i14gIdFwcAAnhq8Ckhch/FtYaWGGTtMTcZJu7WgVa2lKC/BiQqTW4qfNtYVDw1
+EndSecrets
+StartParsonsSecrets
+MDE=2hkk9lVDXXa2wFWlnrm6nA==Sd8/OC9b8L4sax/urk/H8Q==8wS0oxxG04SGjsR8IWCbV3rrMBGQtGjq7G9idjhkbmaNA4dx0Xth5BC8CoiU9+JH
+EndParsonsSecrets
+L R 6
+L C 1
+C 0 == Guild Summary
+V 0,0 == Grey Warriors (20) Leader: Elyse
+V 4,0 == Gray Wolf Clan (2) Leader: Plucki
+V 5,0 == Shimmering Light (1) Leader: Mintee
+Parsons
+SELECT guildName $$toggle::+::.::||$$ ' (' $$toggle::+::.::||$$ guildLevel $$toggle::+::.::||$$ ') Leader: ' $$toggle::+::.::||$$ playerName
+  AS 'Guild Summary'
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+   ON $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName$$ $$toggle::>::>=::<::<=::=::<>::IS$$ $$toggle::Guilds.guildID::Players.playerID::Guilds.leader::Players.guildID::Players.playerName::NOT NULL$$
+ORDER BY guildLevel $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy.db
+EndDatabase
+1

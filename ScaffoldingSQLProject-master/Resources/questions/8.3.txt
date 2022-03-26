@@ -1,13 +1,24 @@
-Create an SQL query to list all of the information about the five most recent TradeTransactions.
+Create an SQL query to list all of the data and fields in the TradeTransactions table, but sort the table so that the most recent transactions are first.
 True
 True
-U2FsdGVkX1/WJZ5SVs1GoLuMux9Tq6Nj/iNwAMe/uXU=
-U2FsdGVkX18nSPNPsEhlg1TQ2pYcLD5ToKeGn1woVag=
-L R 5
+True
+StartSecrets
+MDE=ySbC9D4p6WUYtBu2XM6QPw==sZD5HO79yngMzWXRIiUiPA==492QOq/xq64foIIFi733pIgRpxirwBRzh6tpe+TcBclgZJEMyd5YbMbAOWzshor0
+EndSecrets
+StartParsonsSecrets
+MDE=iumVcvfCxfc30GJxB6nwrA==vF72bbaJ6n+JMUEsyTDFMA==bc/XC5bwA1R/ov97E5l68zm9Vs/jagKWiDlcgiK1PSi7jzPsOWpP84YadSlgfZih
+EndParsonsSecrets
+L R 30
 L C 5
 C 0 == transactionID
-V 0,0 == 30
-V 1,0 == 29
-V 2,0 == 1
-V 3,0 == 28
-V 4,0 == 27
+V 0,0 == 3
+V 1,0 == 15
+Parsons
+SELECT $$toggle::*::transactionID::sendingPlayerID::receivingPlayerID::transactionTime::itemID$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+ORDER BY $$toggle::*::transactionID::sendingPlayerID::receivingPlayerID::transactionTime::itemID$$ $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy-2022.db
+EndDatabase
+1

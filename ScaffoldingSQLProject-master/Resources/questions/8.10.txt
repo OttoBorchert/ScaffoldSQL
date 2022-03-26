@@ -1,0 +1,28 @@
+Write an SQL query to display information about the guilds created in the last 28 days. To make things more interesting, the query should only include guilds whose players have total coins of more than 800. Also, make sure the list is sorted, so the guild with the most coins is first. For columns, just display the name of the guild and the number of coins held by players of that guild. (Warning&colon; The test cases for this question will only work until April 7, 2022)
+True
+True
+True
+StartSecrets
+MDE=+DxabPtvwcfRXMgApvZVig==ssPtxXSxKkTfXPZ3EPeP2g==8aI4n0V/ExiFqxOYJ3+UpsSTDYCEYgcqL3FIV0LT9YTEmqDvGOK0/ZyK6+BjM3Fo
+EndSecrets
+StartParsonsSecrets
+MDE=6bbtmKpKY+fprqPWeBr38g==ykkqDY28JryrBJDVA1I7UQ==K3njdW4nXWEOr3WFdnt9uKP8D0aTIzMBcZMBiJefjTMz+4nalZP4tZu3f+HzB9Gt
+EndParsonsSecrets
+L R 2
+L C 2
+V 0,0 == Grey Warriors
+V 0,1 == 1687
+V 1,0 == Winds of Grey
+V 1,1 == 831
+Parsons
+SELECT guildName, $$toggle::*::COUNT(*)::coins::SUM(coins)::SUM(*)$$
+FROM $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$ NATURAL JOIN $$toggle::Items::Players::Guilds::GuildTreasury::TradeTransactions$$
+WHERE julianday($$toggle::dateCreated::DATE('now')$$) $$toggle::+::-::*::/$$ julianday($$toggle::dateCreated::DATE('now')$$) <= 28
+GROUP BY $$toggle::Guilds.guildID::Players.playerID::Players.playerName::SUM(coins)::COUNT(*)$$
+HAVING $$toggle::COUNT(*)::SUM(coins)::coins::SUM(*)$$ > 800
+ORDER BY $$toggle::COUNT(*)::SUM(coins)::coins::SUM(*)$$ $$toggle::ASC::DESC$$
+EndParsons
+StartDatabase
+fantasy-2022.db
+EndDatabase
+1
